@@ -74,7 +74,10 @@ export function Footer() {
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3 text-gray-600">
                                 <MapPin className="w-5 h-5 text-[var(--color-ortecha-blue)] shrink-0 mt-0.5" />
-                                <span className="text-sm">London, UK (HQ)<br />New York, USA</span>
+                                <div className="text-sm">
+                                    <div className="font-medium text-gray-900 mb-1">Ortecha HQ</div>
+                                    <div>1 Fore Street Avenue<br />London EC2Y 9DT<br />United Kingdom</div>
+                                </div>
                             </li>
                             <li className="flex items-center gap-3 text-gray-600">
                                 <Mail className="w-5 h-5 text-[var(--color-ortecha-blue)] shrink-0" />
