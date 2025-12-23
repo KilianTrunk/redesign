@@ -13,17 +13,17 @@ const RESOURCES = [
     {
         title: "Ortecha Appoints Two UK Partners as Growth Momentum Continues",
         image: "https://ortecha.com/wp-content/uploads/2025/12/London-skyline-768x432.png",
-        href: "https://ortecha.com/resources/ortecha-appoints-two-uk-partners-growth-momentum/",
+        href: "/resources",
     },
     {
         title: "Data Management That Thinks",
         image: "https://ortecha.com/wp-content/uploads/2025/11/Data-Management-that-Thinks-Header-768x432.png",
-        href: "https://ortecha.com/resources/data-management-that-thinks-whitepaper/",
+        href: "/resources",
     },
     {
         title: "Ortecha welcomes Stephen Gatchell as Partner and Head of AI Strategy",
         image: "https://ortecha.com/wp-content/uploads/2025/10/OBG-Press-Release-768x432.png",
-        href: "https://ortecha.com/resources/stephen-gatchell-joins-as-partner-head-ai-strategy/",
+        href: "/resources",
     },
 ];
 
@@ -60,7 +60,7 @@ export function Resources() {
                         <p className="text-xl text-gray-600">Useful resources for your data and AI journey.</p>
                     </div>
                     <Link
-                        href="https://ortecha.com/resources/"
+                        href="/resources"
                         className="px-6 py-3 bg-white text-[var(--color-ortecha-main)] border border-gray-200 rounded-full font-semibold hover:border-[var(--color-ortecha-main)] hover:bg-gray-50 transition-all"
                     >
                         Explore resources

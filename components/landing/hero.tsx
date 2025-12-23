@@ -95,7 +95,7 @@ export function Hero() {
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Link>
                         <Link
-                            href="/contact"
+                            href="/contact-us"
                             className="px-8 py-4 bg-white text-[var(--color-ortecha-main)] border border-gray-200 rounded-full font-semibold text-lg hover:border-[var(--color-ortecha-main)] hover:bg-red-50 transition-all"
                         >
                             Get in Touch

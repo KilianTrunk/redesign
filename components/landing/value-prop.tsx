@@ -77,7 +77,7 @@ export function ValueProp() {
 
                     <div className="pt-4">
                         <Link
-                            href="https://ortecha.com/solutions/"
+                            href="/solutions"
                             className="inline-block px-8 py-4 bg-[var(--color-ortecha-main)] text-white rounded-full font-semibold text-lg hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
                         >
                             Let's get started

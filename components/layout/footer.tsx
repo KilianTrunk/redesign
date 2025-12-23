@@ -40,7 +40,7 @@ export function Footer() {
                             <li><Link href="/solutions" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Solutions</Link></li>
                             <li><Link href="/resources" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Resources</Link></li>
                             <li><Link href="/careers" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Careers</Link></li>
-                            <li><Link href="/contact" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Contact</Link></li>
+                            <li><Link href="/contact-us" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Contact</Link></li>
                         </ul>
                     </div>
 

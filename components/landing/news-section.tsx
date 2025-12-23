@@ -82,7 +82,7 @@ export function NewsSection() {
                         </div>
                         <div className="pt-8">
                             <Link
-                                href="https://ortecha.com/resources/ortecha-broadgate-consultants-announce-merger/"
+                                href="/resources"
                                 className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 group-hover:text-[var(--color-ortecha-main)] transition-colors"
                             >
                                 Read announcement <ArrowRight className="w-4 h-4" />
@@ -108,7 +108,7 @@ export function NewsSection() {
                         </div>
                         <div className="pt-8">
                             <Link
-                                href="https://ortecha.com/resources/data-management-that-thinks-whitepaper/"
+                                href="/resources"
                                 className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 group-hover:text-[var(--color-ortecha-main)] transition-colors"
                             >
                                 Get your copy <ArrowRight className="w-4 h-4" />

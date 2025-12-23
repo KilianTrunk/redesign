@@ -14,19 +14,19 @@ const CARDS = [
         title: "Assess & Benchmark",
         subtitle: "See exactly where you stand. Measure your data and AI maturity with clarity, confidence and proof, not guesswork.",
         image: "https://ortecha.com/wp-content/uploads/2025/10/Assessments-Benchmarking-Header-Ortecha-Solutions.webp",
-        href: "https://ortecha.com/solutions/",
+        href: "/solutions",
     },
     {
         title: "Strategy & Operating Model",
         subtitle: "Build your vision and lay foundations that turn plans into progress and keep pace as you grow.",
         image: "https://ortecha.com/wp-content/uploads/2025/10/Strategy-Operating-Model-Header.webp",
-        href: "https://ortecha.com/solutions/",
+        href: "/solutions",
     },
     {
         title: "Enterprise Architecture",
         subtitle: "Stop your systems fighting each other and get your whole organisation pulling in the same direction.",
         image: "https://ortecha.com/wp-content/uploads/2025/10/Enterprise-Architecture-Header-Ortecha-Solutions-no-donut.webp",
-        href: "https://ortecha.com/solutions/",
+        href: "/solutions",
     },
 ];
 

@@ -77,7 +77,7 @@ export function TeamSection() {
                     </div>
                     <div>
                         <Link
-                            href="https://ortecha.com/about-us/"
+                            href="/about-us"
                             className="px-6 py-3 bg-[var(--color-ortecha-main)] text-white rounded-full font-semibold hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg inline-block"
                         >
                             Meet the team

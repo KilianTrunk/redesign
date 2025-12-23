@@ -85,7 +85,7 @@ export function SolutionsIntro() {
                     </p>
                     <div className="pt-2">
                         <Link
-                            href="https://ortecha.com/solutions/"
+                            href="/solutions"
                             className="text-[var(--color-ortecha-main)] font-bold text-lg hover:text-red-400 transition-colors inline-flex items-center gap-2 group"
                         >
                             Explore all solutions
