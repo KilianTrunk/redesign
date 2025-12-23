@@ -60,7 +60,7 @@ const NEWS_ITEMS = [
 export function LatestNews() {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {NEWS_ITEMS.map((item, index) => (
+            {NEWS_ITEMS.slice(0, 6).map((item, index) => (
                 <Link
                     key={index}
                     href={item.href}
