@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useEffect, useRef, useState } from "react";
 
 const TIMELINE_EVENTS = [
     { year: "2010", title: "Founded in the UK" },
@@ -21,48 +16,66 @@ const TIMELINE_EVENTS = [
 ];
 
 export function Timeline() {
-    const containerRef = useRef<HTMLDivElement>(null);
+    const scrollRef = useRef<HTMLDivElement>(null);
 
-    useGSAP(() => {
-        // Horizontal scroll animation
-        const container = containerRef.current;
+    useEffect(() => {
+        const container = scrollRef.current;
         if (!container) return;
 
-        // Simple enter animation for items
-        gsap.from(".timeline-item", {
-            y: 50,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            scrollTrigger: {
-                trigger: container,
-                start: "top 80%",
-            }
-        });
+        let animationId: number;
+        let startTime: number;
+        const duration = 25000; // 25 seconds for full cycle
+        const totalWidth = container.scrollWidth - container.clientWidth;
 
-    }, { scope: containerRef });
+        const animate = (timestamp: number) => {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+            const progress = (elapsed % duration) / duration;
+
+            // Smooth easing function
+            const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            const easedProgress = easeInOutCubic(progress);
+
+            container.scrollLeft = easedProgress * totalWidth;
+
+            animationId = requestAnimationFrame(animate);
+        };
+
+        animationId = requestAnimationFrame(animate);
+
+        return () => {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        };
+    }, []);
 
     return (
-        <div ref={containerRef} className="py-8 overflow-x-auto pb-12 hide-scrollbar">
-            <div className="flex gap-4 md:gap-8 min-w-max px-4">
-                {TIMELINE_EVENTS.map((event, index) => (
-                    <div
-                        key={index}
-                        className="timeline-item bg-white p-6 rounded-2xl border border-gray-100 shadow-sm w-[280px] md:w-[320px] flex-shrink-0 relative overflow-hidden group hover:border-[var(--color-ortecha-main)]/30 hover:shadow-md transition-all"
-                    >
-                        <div className="absolute top-0 right-0 p-4 opacity-10 font-bold text-6xl text-[var(--color-ortecha-main)] group-hover:opacity-20 transition-opacity">
-                            {event.year}
-                        </div>
-                        <div className="relative z-10 pt-2">
-                            <div className="text-[var(--color-ortecha-main)] font-bold text-2xl mb-3">
+        <div className="py-8">
+            <div
+                ref={scrollRef}
+                className="overflow-x-auto pb-12 hide-scrollbar"
+            >
+                <div className="flex gap-4 md:gap-8 min-w-max px-4">
+                    {TIMELINE_EVENTS.map((event, index) => (
+                        <div
+                            key={index}
+                            className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm w-[280px] md:w-[320px] flex-shrink-0 relative overflow-hidden group hover:border-[var(--color-ortecha-main)]/30 hover:shadow-md transition-all"
+                        >
+                            <div className="absolute top-0 right-0 p-4 opacity-10 font-bold text-6xl text-[var(--color-ortecha-main)] group-hover:opacity-20 transition-opacity">
                                 {event.year}
                             </div>
-                            <div className="text-gray-800 font-medium text-lg leading-relaxed">
-                                {event.title}
+                            <div className="relative z-10 pt-2">
+                                <div className="text-[var(--color-ortecha-main)] font-bold text-2xl mb-3">
+                                    {event.year}
+                                </div>
+                                <div className="text-gray-800 font-medium text-lg leading-relaxed">
+                                    {event.title}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );

@@ -49,11 +49,6 @@ export default function AboutPage() {
                             </p>
                         </div>
 
-                        {/* Timeline */}
-                        <div className="mt-16">
-                            <h2 className="text-3xl font-bold text-gray-900 mb-8">How we got here</h2>
-                            <Timeline />
-                        </div>
                     </div>
 
                     <div className="space-y-12" id="values">
@@ -116,6 +111,17 @@ export default function AboutPage() {
                         </div>
                     </div>
                 </div>
+            </Section>
+
+            {/* How we got here */}
+            <Section className="bg-gray-50" id="timeline">
+                <div className="text-center max-w-4xl mx-auto mb-12">
+                    <h2 className="text-4xl font-bold text-gray-900 mb-6">How we got here</h2>
+                    <p className="text-xl text-gray-600">
+                        From our founding in the UK to our global expansion, here's our journey of growth and innovation.
+                    </p>
+                </div>
+                <Timeline />
             </Section>
 
             {/* Team Section */}
