@@ -103,13 +103,9 @@ export function Hero() {
                     </div>
                 </div>
 
-                <div className="order-1 lg:order-2 flex justify-center relative h-[600px] items-center">
+                <div className="order-1 lg:order-2 flex justify-center relative h-[780px] items-center">
                     <div ref={imageRef} className="relative w-full h-full flex items-center justify-center overflow-hidden">
                         <ThreeMarketChart className="z-10" />
-                        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#FEF8F9] to-transparent pointer-events-none z-20"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#FEF8F9] to-transparent pointer-events-none z-20"></div>
-                        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#FEF8F9] to-transparent pointer-events-none z-20"></div>
-                        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#FEF8F9] to-transparent pointer-events-none z-20"></div>
                     </div>
                 </div>
             </div>

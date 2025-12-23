@@ -64,7 +64,7 @@ export function SolutionsIntro() {
     );
 
     return (
-        <Section ref={containerRef} className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden">
+        <Section ref={containerRef} className="py-20 bg-[#343434] relative overflow-hidden">
             <div
                 ref={backgroundRef}
                 className="absolute inset-0 opacity-30"
@@ -89,7 +89,7 @@ export function SolutionsIntro() {
                             className="text-[var(--color-ortecha-main)] font-bold text-lg hover:text-red-400 transition-colors inline-flex items-center gap-2 group"
                         >
                             Explore all solutions
-                            <span className="transform group-hover:translate-x-1 transition-transform text-2xl">→</span>
+                            <span className="transform group-hover:translate-x-1 transition-transform text-xl">→</span>
                         </Link>
                     </div>
                 </div>

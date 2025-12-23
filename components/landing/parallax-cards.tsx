@@ -96,17 +96,24 @@ export function ParallaxCards() {
         const rotateX = ((y - centerY) / centerY) * -10; // Max rotation deg
         const rotateY = ((x - centerX) / centerX) * 10;
 
+        // Use precise properties instead of CSS string for better interpolation
         gsap.to(card, {
-            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-            duration: 0.5,
-            ease: "power2.out"
+            rotationX: rotateX,
+            rotationY: rotateY,
+            scale: 1.02, // Subtle scale up on hover
+            transformPerspective: 1000,
+            duration: 0.4,
+            ease: "power2.out",
+            overwrite: "auto"
         });
 
         // Parallax effect for content
         gsap.to(content, {
             x: (x - centerX) * 0.05,
             y: (y - centerY) * 0.05,
-            duration: 0.5
+            duration: 0.4,
+            ease: "power2.out",
+            overwrite: "auto"
         });
 
         // Inverse/Depth effect for background
@@ -114,7 +121,9 @@ export function ParallaxCards() {
             scale: 1.1,
             x: (x - centerX) * -0.05,
             y: (y - centerY) * -0.05,
-            duration: 0.5
+            duration: 0.4,
+            ease: "power2.out",
+            overwrite: "auto"
         });
     };
 
@@ -123,14 +132,29 @@ export function ParallaxCards() {
         const content = card.querySelector('.card-content') as HTMLElement;
         const bg = card.querySelector('.card-bg') as HTMLElement;
 
-        gsap.to([card, content, bg], {
-            transform: "none",
+        gsap.to(card, {
+            rotationX: 0,
+            rotationY: 0,
+            scale: 1,
             x: 0,
             y: 0,
-            scale: 1,
             duration: 0.8,
-            ease: "elastic.out(1, 0.5)"
+            ease: "elastic.out(1, 0.5)",
+            overwrite: "auto"
         });
+
+        gsap.to([content, bg], {
+            x: 0,
+            y: 0,
+            scale: 1, // Reset bg scale specifically or handled by CSS class? bg was scaled to 1.1 on move
+            duration: 0.8,
+            ease: "power3.out", // Elastic might be too much for content/bg
+            overwrite: "auto"
+        });
+        
+        // Ensure bg resets to cover if needed, but scale 1 is probably fine if CSS sets it.
+        // Actually the original code reset everything with elastic.
+        // Let's keep it simple but separate to avoid "transform: none" glitch.
     };
 
     return (

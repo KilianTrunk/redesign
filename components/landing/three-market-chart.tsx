@@ -65,30 +65,22 @@ function Candlestick({ data, index }: { data: CandlestickData; index: number }) 
         <group ref={groupRef} position={[data.x, 0, 0]}>
             <mesh ref={wickRef} position={[0, wickY, 0]}>
                 <boxGeometry args={[0.05, wickHeight, 0.05]} />
-                <meshStandardMaterial
+                <meshBasicMaterial
                     color={data.color}
-                    emissive={data.color}
-                    emissiveIntensity={0.5}
-                    metalness={0.7}
-                    roughness={0.2}
                 />
             </mesh>
 
             <mesh ref={bodyRef} position={[0, bodyY, 0]}>
-                <boxGeometry args={[0.35, bodyHeight * 1.5, 0.35]} />
-                <meshStandardMaterial
+                <boxGeometry args={[0.4, bodyHeight * 2.5, 0.4]} />
+                <meshBasicMaterial
                     color={data.color}
-                    emissive={data.color}
-                    emissiveIntensity={0.8}
-                    metalness={0.8}
-                    roughness={0.2}
                     transparent
                     opacity={0.95}
                 />
             </mesh>
 
             <mesh position={[0, bodyY, 0]}>
-                <boxGeometry args={[0.4, bodyHeight * 1.5 + 0.1, 0.4]} />
+                <boxGeometry args={[0.45, bodyHeight * 2.5 + 0.1, 0.45]} />
                 <meshBasicMaterial
                     color={data.color}
                     transparent
@@ -98,6 +90,10 @@ function Candlestick({ data, index }: { data: CandlestickData; index: number }) 
         </group>
     );
 }
+
+// ... (FloatingParticles and MarketChart functions remain unchanged)
+
+
 
 
 function FloatingParticles() {
@@ -223,7 +219,14 @@ function Scene() {
 
 export function ThreeMarketChart({ className }: { className?: string }) {
     return (
-        <div className={`w-full h-full min-h-[600px] ${className}`} style={{ backgroundColor: '#FEF8F9' }}>
+        <div 
+            className={`w-full h-full min-h-[600px] ${className}`} 
+            style={{ 
+                background: 'transparent',
+                maskImage: 'linear-gradient(to right, transparent, black 10%, black 80%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 80%, transparent)'
+            }}
+        >
             <Canvas
                 camera={{ position: [0, 2, 8], fov: 50 }}
                 gl={{
@@ -232,7 +235,7 @@ export function ThreeMarketChart({ className }: { className?: string }) {
                     powerPreference: "high-performance"
                 }}
             >
-                <color attach="background" args={["#FEF8F9"]} />
+                {/* Removed background color for transparency */}
                 <Scene />
             </Canvas>
         </div>

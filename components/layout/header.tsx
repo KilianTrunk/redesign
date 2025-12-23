@@ -71,7 +71,7 @@ export function Header() {
                         <Link
                             key={item.label}
                             href={item.href}
-                            className="text-xl font-semibold text-gray-700 hover:text-[var(--color-ortecha-main)] transition-colors relative group py-2"
+                            className="text-xl font-semibold text-[#343434] hover:text-[var(--color-ortecha-main)] transition-colors relative group"
                         >
                             {item.label}
                             <span className="absolute left-1/2 -bottom-1 w-0 h-0.5 bg-[var(--color-ortecha-main)] transition-all duration-300 group-hover:w-full group-hover:left-0" />
@@ -82,7 +82,7 @@ export function Header() {
                 <div className="hidden lg:flex items-center gap-4">
                     <Link
                         href="/contact-us"
-                        className="px-6 py-2.5 bg-[var(--color-ortecha-main)] text-white text-lg font-semibold rounded-lg hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 duration-200"
+                        className="px-9 py-4 bg-[var(--color-ortecha-main)] text-white text-xl font-bold rounded-full hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-200"
                     >
                         Contact Us
                     </Link>
@@ -120,7 +120,7 @@ export function Header() {
                     <Link
                         href="/contact-us"
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="px-10 py-4 bg-[var(--color-ortecha-main)] text-white text-xl font-semibold rounded-lg mt-6"
+                        className="px-10 py-4 bg-[var(--color-ortecha-main)] text-white text-xl font-semibold rounded-full mt-6"
                     >
                         Contact Us
                     </Link>

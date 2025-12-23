@@ -48,22 +48,45 @@ export function ClientLogos() {
         if (!carouselRef.current) return;
 
         const carousel = carouselRef.current;
-        const scrollWidth = carousel.scrollWidth;
-        const clientWidth = carousel.clientWidth;
+        let tween: gsap.core.Tween;
 
-        const tl = gsap.timeline({ repeat: -1 });
+        const startAnimation = () => {
+            // Get the first item of the second set (the duplicate start)
+            const firstItemSecondSet = carousel.children[LOGOS.length] as HTMLElement;
+            if (!firstItemSecondSet) return;
 
-        tl.to(carousel, {
-            x: -(scrollWidth - clientWidth),
-            duration: 30,
-            ease: "none",
-        }).to(carousel, {
-            x: 0,
-            duration: 0,
-        });
+            // The distance to the start of the second set is exactly the width of the first set + gaps
+            const distance = firstItemSecondSet.offsetLeft;
+
+            // Kill any existing animation to prevent conflicts
+            if (tween) tween.kill();
+
+            // Create a seamless loop
+            tween = gsap.fromTo(
+                carousel,
+                { x: 0 },
+                {
+                    x: -distance,
+                    duration: 25, // Faster speed as requested
+                    ease: "none",
+                    repeat: -1,
+                }
+            );
+        };
+
+        // Start animation
+        startAnimation();
+
+        // Handle resize to recalculate distances
+        const handleResize = () => {
+            startAnimation();
+        };
+
+        window.addEventListener("resize", handleResize);
 
         return () => {
-            tl.kill();
+            window.removeEventListener("resize", handleResize);
+            if (tween) tween.kill();
         };
     }, []);
 

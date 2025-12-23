@@ -36,11 +36,11 @@ export function Footer() {
                     <div>
                         <h4 className="text-lg font-bold text-gray-900 mb-6">Company</h4>
                         <ul className="space-y-3">
-                            <li><Link href="/about-us" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">About Us</Link></li>
-                            <li><Link href="/solutions" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Solutions</Link></li>
-                            <li><Link href="/resources" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Resources</Link></li>
-                            <li><Link href="/careers" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Careers</Link></li>
-                            <li><Link href="/contact-us" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Contact</Link></li>
+                            <li><Link href="/about-us" className="text-gray-600 hover:text-black transition-colors">About Us</Link></li>
+                            <li><Link href="/solutions" className="text-gray-600 hover:text-black transition-colors">Solutions</Link></li>
+                            <li><Link href="/resources" className="text-gray-600 hover:text-black transition-colors">Resources</Link></li>
+                            <li><Link href="/careers" className="text-gray-600 hover:text-black transition-colors">Careers</Link></li>
+                            <li><Link href="/contact" className="text-gray-600 hover:text-black transition-colors">Contact</Link></li>
                         </ul>
                     </div>
 
@@ -48,10 +48,10 @@ export function Footer() {
                     <div>
                         <h4 className="text-lg font-bold text-gray-900 mb-6">Solutions</h4>
                         <ul className="space-y-3">
-                            <li><Link href="#" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Data Governance</Link></li>
-                            <li><Link href="#" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Data Quality</Link></li>
-                            <li><Link href="#" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Data Strategy</Link></li>
-                            <li><Link href="#" className="text-gray-600 hover:text-[var(--color-ortecha-blue)] transition-colors">Master Data Management</Link></li>
+                            <li><Link href="#" className="text-gray-600 hover:text-black transition-colors">Data Governance</Link></li>
+                            <li><Link href="#" className="text-gray-600 hover:text-black transition-colors">Data Quality</Link></li>
+                            <li><Link href="#" className="text-gray-600 hover:text-black transition-colors">Data Strategy</Link></li>
+                            <li><Link href="#" className="text-gray-600 hover:text-black transition-colors">Master Data Management</Link></li>
                         </ul>
                     </div>
 
@@ -65,7 +65,7 @@ export function Footer() {
                             </li>
                             <li className="flex items-center gap-3 text-gray-600">
                                 <Mail className="w-5 h-5 text-[var(--color-ortecha-blue)] shrink-0" />
-                                <a href="mailto:info@ortecha.com" className="text-sm hover:text-[var(--color-ortecha-blue)]">info@ortecha.com</a>
+                                <a href="mailto:info@ortecha.com" className="text-sm hover:text-black">info@ortecha.com</a>
                             </li>
                             <li className="flex items-center gap-3 text-gray-600">
                                 <Phone className="w-5 h-5 text-[var(--color-ortecha-blue)] shrink-0" />

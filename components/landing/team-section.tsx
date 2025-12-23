@@ -91,16 +91,16 @@ export function TeamSection() {
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
                     {TEAM.map((member, index) => (
-                        <div key={index} className="team-card flex-shrink-0 w-[220px] snap-center">
-                            <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                                <div className="aspect-square relative overflow-hidden">
+                        <div key={index} className="team-card flex-shrink-0 w-[220px] md:w-auto md:flex-1 snap-center">
+                            <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow p-6">
+                                <div className="aspect-square relative">
                                     <img
                                         src={member.image}
                                         alt={member.name}
-                                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                                        className="w-full h-full object-cover rounded-xl transition-transform duration-500 hover:scale-105 hover:z-10 relative"
                                     />
                                 </div>
-                                <div className="p-4">
+                                <div className="pt-4 pb-2 px-2">
                                     <h4 className="font-bold text-base text-gray-900">{member.name}</h4>
                                     <p className="text-xs text-[var(--color-ortecha-main)] font-medium mt-1">{member.role}</p>
                                 </div>
