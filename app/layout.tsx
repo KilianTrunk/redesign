@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ortecha - Data Made Human",
   description: "Governance, quality, and strategy tailored for real people.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
