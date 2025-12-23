@@ -34,7 +34,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SmoothScroller>
           <Header />
-          <main className="min-h-screen bg-white pt-20">
+          <main className="min-h-screen bg-white pt-16">
             {children}
           </main>
           <Footer />

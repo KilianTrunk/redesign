@@ -63,7 +63,7 @@ export function Hero() {
         <Section
             ref={containerRef}
             // Apple-style: Subtle radial gradient highlight + mesh-like feel
-            className="min-h-[calc(100vh-5rem)] flex items-center justify-center pt-16 pb-20 bg-[radial-gradient(circle_at_50%_50%,_rgb(255,245,245)_0%,_rgb(255,255,255)_50%,_rgb(249,250,251)_100%)] relative overflow-hidden"
+            className="min-h-[calc(100vh-4rem)] flex items-center justify-center pt-12 pb-20 bg-[radial-gradient(circle_at_50%_50%,_rgb(255,245,245)_0%,_rgb(255,255,255)_50%,_rgb(249,250,251)_100%)] relative overflow-hidden"
         >
             {/* Subtle red tint overlay for atmosphere */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-[var(--color-ortecha-main)]/5 via-transparent to-transparent opacity-50"></div>
