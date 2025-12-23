@@ -47,13 +47,13 @@ export function Header() {
         <header
             ref={headerRef}
             className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4",
                 isScrolled
-                    ? "bg-white/95 backdrop-blur-md py-5 shadow-md border-b border-gray-100"
-                    : "bg-transparent py-8 border-transparent"
+                    ? "bg-white/95 backdrop-blur-md shadow-md border-b border-gray-100"
+                    : "bg-transparent border-transparent"
             )}
         >
-            <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+            <div className="container mx-auto px-4 md:px-6 flex items-center justify-between min-h-[56px] md:min-h-[64px]">
                 <Link href="/" className="relative z-50 flex items-center gap-2">
                     <Image
                         src="/assets/logo.png"
@@ -71,7 +71,7 @@ export function Header() {
                         <Link
                             key={item.label}
                             href={item.href}
-                            className="text-xl font-semibold text-gray-700 hover:text-[var(--color-ortecha-main)] transition-colors relative group"
+                            className="text-xl font-semibold text-gray-700 hover:text-[var(--color-ortecha-main)] transition-colors relative group py-2"
                         >
                             {item.label}
                             <span className="absolute left-1/2 -bottom-1 w-0 h-0.5 bg-[var(--color-ortecha-main)] transition-all duration-300 group-hover:w-full group-hover:left-0" />
@@ -82,7 +82,7 @@ export function Header() {
                 <div className="hidden lg:flex items-center gap-4">
                     <Link
                         href="/contact-us"
-                        className="px-9 py-4 bg-[var(--color-ortecha-main)] text-white text-xl font-bold rounded-lg hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-200"
+                        className="px-6 py-2.5 bg-[var(--color-ortecha-main)] text-white text-lg font-semibold rounded-lg hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 duration-200"
                     >
                         Contact Us
                     </Link>
@@ -120,7 +120,7 @@ export function Header() {
                     <Link
                         href="/contact-us"
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="px-12 py-5 bg-[var(--color-ortecha-main)] text-white text-2xl font-bold rounded-lg mt-6"
+                        className="px-10 py-4 bg-[var(--color-ortecha-main)] text-white text-xl font-semibold rounded-lg mt-6"
                     >
                         Contact Us
                     </Link>
