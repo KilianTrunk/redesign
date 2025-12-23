@@ -66,7 +66,7 @@ export default function TechnologyPartnersPage() {
 
             {/* Capabilities */}
             <Section className="bg-gray-50">
-                <h2 className="text-3xl font-bold text-center mb-16">Who we've worked with</h2>
+                <h2 className="text-3xl font-bold text-center mb-16 text-[var(--color-ortecha-main)]">Who we've worked with</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center opacity-80 text-center">
                     {[
                         { name: "HSBC", url: "https://ortecha.com/wp-content/uploads/2025/07/HSBC-Logo.png" },

@@ -55,7 +55,7 @@ export default function ContactPage() {
                     {/* Locations */}
                     <div className="space-y-12">
                         <div>
-                            <h2 className="text-3xl font-bold text-gray-900 mb-8">Where finding us</h2>
+                            <h2 className="text-3xl font-bold text-gray-900 mb-8">Where to find us</h2>
                             <div className="space-y-8">
                                 <div className="flex gap-4 items-start">
                                     <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 overflow-hidden">
@@ -88,8 +88,12 @@ export default function ContactPage() {
                                 </div>
 
                                 <div className="flex gap-4 items-start">
-                                    <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center shrink-0 text-[var(--color-ortecha-main)]">
-                                        <MapPin className="w-6 h-6" />
+                                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 overflow-hidden">
+                                        <img
+                                            src="https://ortecha.com/wp-content/uploads/2025/09/Canada-flag-circle-transparent-300x300.png"
+                                            alt="Canada Flag"
+                                            className="w-full h-full object-cover"
+                                        />
                                     </div>
                                     <div>
                                         <h3 className="text-xl font-bold text-gray-900 mb-2">Ortecha CA</h3>

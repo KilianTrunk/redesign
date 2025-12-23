@@ -69,7 +69,7 @@ export function Footer() {
                             </li>
                             <li className="flex items-center gap-3 text-gray-600">
                                 <Phone className="w-5 h-5 text-[var(--color-ortecha-blue)] shrink-0" />
-                                <span className="text-sm">+44 (0) 20 1234 5678</span>
+                                <a href="tel:+442087983637" className="text-sm hover:text-black">+44 (0) 20 8798 3637</a>
                             </li>
                         </ul>
                     </div>
