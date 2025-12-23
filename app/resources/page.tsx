@@ -90,7 +90,7 @@ export default function ResourcesPage() {
             </Section>
 
             {/* Filter */}
-            <div className="sticky top-20 z-30 bg-white/90 backdrop-blur-md border-b border-gray-100 py-4">
+            <div className="sticky top-24 z-30 bg-white/90 backdrop-blur-md border-b border-gray-100 py-6">
                 <div className="container mx-auto px-4 md:px-6 overflow-x-auto">
                     <div className="flex items-center justify-center gap-2 min-w-max">
                         {CATEGORIES.map((cat) => (

@@ -19,11 +19,13 @@ export function Hero() {
     useGSAP(
         () => {
             const tl = gsap.timeline({
+                defaults: { ease: "power3.out" },
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top 80%", // improved start position
                     toggleActions: "play none none reverse", // Re-plays on enter, reverses on leave back
-                }
+                },
+                delay: 0.5 // Wait for header/menu to be perceived first
             });
 
             // Initial Entrance Animation
@@ -63,7 +65,7 @@ export function Hero() {
         <Section
             ref={containerRef}
             // Apple-style: Subtle radial gradient highlight + mesh-like feel
-            className="min-h-[calc(100vh-4rem)] flex items-center justify-center pt-12 pb-20 bg-[radial-gradient(circle_at_50%_50%,_rgb(255,245,245)_0%,_rgb(255,255,255)_50%,_rgb(249,250,251)_100%)] relative overflow-hidden"
+            className="min-h-[calc(100vh-4rem)] flex items-center justify-center pt-12 pb-20 relative overflow-hidden"
         >
             {/* Subtle red tint overlay for atmosphere */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-[var(--color-ortecha-main)]/5 via-transparent to-transparent opacity-50"></div>
@@ -89,7 +91,7 @@ export function Hero() {
                     <div ref={btnRef} className="flex flex-wrap gap-4 pt-4">
                         <Link
                             href="/solutions"
-                            className="group px-8 py-4 bg-[var(--color-ortecha-main)] text-white rounded-full font-semibold text-lg hover:bg-[var(--color-ortecha-dark-red)] transition-all flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-1"
+                            className="group px-8 py-4 bg-[var(--color-ortecha-main)] text-white rounded-full font-semibold text-lg hover:bg-[var(--color-ortecha-dark-red)] transition-all flex items-center gap-2 shadow-lg hover:shadow-xl"
                         >
                             Our Solutions
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
