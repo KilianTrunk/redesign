@@ -1,9 +1,24 @@
 "use client";
 
-import { ReactLenis } from "lenis/react";
-import { ReactNode } from "react";
+import { ReactLenis, useLenis } from "lenis/react";
+import { ReactNode, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export function SmoothScroller({ children }: { children: ReactNode }) {
+    const pathname = usePathname();
+    const lenis = useLenis();
+
+    // Scroll to top when navigating to a new page
+    useEffect(() => {
+        if (lenis) {
+            // Small delay to ensure the new page content has loaded
+            const timeout = setTimeout(() => {
+                lenis.scrollTo(0);
+            }, 100);
+            return () => clearTimeout(timeout);
+        }
+    }, [pathname, lenis]);
+
     return (
         <ReactLenis root options={{
             lerp: 0.08,
