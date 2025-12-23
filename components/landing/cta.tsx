@@ -74,7 +74,7 @@ export function CTA() {
                     <div className="pt-4">
                         <Link
                             href="/contact-us"
-                            className="inline-flex items-center gap-3 px-10 py-5 bg-[var(--color-ortecha-main)] text-white rounded-full font-bold text-xl hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 group"
+                            className="inline-flex items-center gap-3 px-10 py-5 bg-[var(--color-ortecha-main)] text-white rounded-full font-bold text-xl hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-xl hover:shadow-2xl group"
                         >
                             Book a call with us
                             <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />

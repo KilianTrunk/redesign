@@ -86,7 +86,7 @@ export function SolutionsIntro() {
                     <div className="pt-2">
                         <Link
                             href="/solutions"
-                            className="text-[var(--color-ortecha-main)] font-bold text-lg hover:text-red-400 transition-colors inline-flex items-center gap-2 group"
+                            className="inline-flex items-center gap-2 px-9 py-4 bg-[var(--color-ortecha-main)] text-white text-xl font-bold rounded-full hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg duration-200 group"
                         >
                             Explore all solutions
                             <span className="transform group-hover:translate-x-1 transition-transform text-xl">→</span>

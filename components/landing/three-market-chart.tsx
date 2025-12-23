@@ -24,7 +24,8 @@ function Candlestick({ data, index }: { data: CandlestickData; index: number }) 
     useEffect(() => {
         if (!groupRef.current || !bodyRef.current || !wickRef.current) return;
 
-        const tl = gsap.timeline({ delay: index * 0.08 });
+        // Reduced delay to 1.0s to start filling as text appears
+        const tl = gsap.timeline({ delay: 1.0 + index * 0.08 });
 
         gsap.set(groupRef.current.position, { y: -8 });
         gsap.set(bodyRef.current.scale, { y: 0, x: 0, z: 0 });
@@ -142,30 +143,90 @@ function FloatingParticles() {
 function MarketChart() {
     const groupRef = useRef<THREE.Group>(null);
 
-    const candlestickData: CandlestickData[] = useMemo(() => {
-        const data: CandlestickData[] = [];
-        let prevClose = 2;
+// Module-level cache for data persistence
+let globalCandlestickData: CandlestickData[] | null = null;
 
-        for (let i = 0; i < 15; i++) {
-            const open = prevClose + (Math.random() - 0.5) * 0.3;
-            const close = open + (Math.random() - 0.5) * 1.2;
-            const high = Math.max(open, close) + Math.random() * 0.6;
-            const low = Math.min(open, close) - Math.random() * 0.6;
+function getCandlestickData(): CandlestickData[] {
+    if (globalCandlestickData) return globalCandlestickData;
 
-            data.push({
-                open,
-                close,
-                high,
-                low,
-                x: (i - 7) * 0.7,
-                color: close >= open ? "#00ff88" : "#ff3366",
-            });
+    const data: CandlestickData[] = [];
+    let prevClose = 2;
 
-            prevClose = close;
+    for (let i = 0; i < 15; i++) {
+        // Default parameters
+        let trend = 0.1;
+        let volatility = 1.0;
+        let forcedDirection: 'up' | 'down' | null = null;
+        let minMove = 0.2;
+
+        // Custom Pattern Logic (0-indexed)
+        if (i === 0) { forcedDirection = 'up'; } // 1. Green, bottom
+        else if (i === 1) { forcedDirection = 'up'; trend = 0.4; } // 2. Green, higher
+        else if (i === 2) { forcedDirection = 'down'; } // 3. Red, down
+        else if (i === 3) { forcedDirection = 'down'; } // 4. Red, down
+        else if (i === 4) { forcedDirection = 'up'; trend = 0.6; minMove = 0.5; } // 5. Green, up high
+        else if (i === 5) { forcedDirection = 'up'; trend = 0.6; minMove = 0.5; } // 6. Green, up high
+        else if (i === 6) { forcedDirection = 'down'; } // 7. Red
+        else if (i === 7) { forcedDirection = 'up'; trend = 0.8; minMove = 0.6; } // 8. Green, peak
+        else {
+            // Remainder: mild uptrend with randomness
+            trend = 0.15;
+            volatility = 1.4;
         }
 
-        return data;
-    }, []);
+        const open = prevClose + (Math.random() - 0.5) * 0.2;
+        let change = (Math.random() - 0.5) * volatility + trend;
+
+        // Apply Pattern Constraints
+        if (forcedDirection === 'up') {
+            change = Math.abs(change) + (Math.random() * 0.2); // Ensure positive
+            if (change < minMove) change = minMove + Math.random() * 0.2;
+        } else if (forcedDirection === 'down') {
+            change = -Math.abs(change) - (Math.random() * 0.1); // Ensure negative
+            if (Math.abs(change) < minMove) change = -minMove - Math.random() * 0.2;
+        } else {
+             // General min height enforcement
+             if (Math.abs(change) < 0.2) change = change >= 0 ? 0.2 : -0.2;
+        }
+
+        const close = open + change;
+        const high = Math.max(open, close) + Math.random() * 0.4;
+        const low = Math.min(open, close) - Math.random() * 0.4;
+
+        data.push({
+            open,
+            close,
+            high,
+            low,
+            x: (i - 7) * 0.7,
+            color: close >= open ? "#00ff88" : "#ff3366",
+        });
+
+        prevClose = close;
+    }
+
+    // Calculate center of the data range
+    const minLow = Math.min(...data.map(d => d.low));
+    const maxHigh = Math.max(...data.map(d => d.high));
+    const centerY = (minLow + maxHigh) / 2;
+
+    // Shift all points to center around slightly higher than 0 (visual center)
+    const verticalOffset = 2.0;
+    const horizontalOffset = 1.0;
+
+    globalCandlestickData = data.map(d => ({
+        ...d,
+        x: d.x + horizontalOffset,
+        open: d.open - centerY + verticalOffset,
+        close: d.close - centerY + verticalOffset,
+        high: d.high - centerY + verticalOffset,
+        low: d.low - centerY + verticalOffset,
+    }));
+
+    return globalCandlestickData;
+}
+
+    const candlestickData: CandlestickData[] = useMemo(() => getCandlestickData(), []);
 
     useFrame((state) => {
         if (!groupRef.current) return;

@@ -12,6 +12,7 @@ import { ThreeMarketChart } from "@/components/landing/three-market-chart";
 export function Hero() {
     const containerRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
+    const subtitleRef = useRef<HTMLHeadingElement>(null);
     const textRef = useRef<HTMLParagraphElement>(null);
     const btnRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
@@ -19,23 +20,30 @@ export function Hero() {
     useGSAP(
         () => {
             const tl = gsap.timeline({
+                defaults: { ease: "power3.out" },
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top 80%", // improved start position
                     toggleActions: "play none none reverse", // Re-plays on enter, reverses on leave back
-                }
+                },
+                delay: 0.5 // Wait for header/menu to be perceived first
             });
 
             // Initial Entrance Animation
             // Removed scrollTrigger scrub logic to prevent "disappearing content" bug on scroll up.
             // This ensures content is always visible after initial load.
 
-            tl.from(titleRef.current, {
+            tl.from(subtitleRef.current, {
+                y: 20,
+                opacity: 0,
+                duration: 0.8,
+            })
+            .from(titleRef.current, {
                 y: 100,
                 opacity: 0,
                 duration: 1.2,
                 ease: "power4.out",
-            })
+            }, "-=0.6")
                 .from(textRef.current, {
                     y: 50,
                     opacity: 0,
@@ -63,13 +71,16 @@ export function Hero() {
         <Section
             ref={containerRef}
             // Apple-style: Subtle radial gradient highlight + mesh-like feel
-            className="min-h-[calc(100vh-4rem)] flex items-center justify-center pt-12 pb-20 bg-[radial-gradient(circle_at_50%_50%,_rgb(255,245,245)_0%,_rgb(255,255,255)_50%,_rgb(249,250,251)_100%)] relative overflow-hidden"
+            className="min-h-[calc(100vh-4rem)] flex items-center justify-center pt-12 pb-20 relative overflow-hidden"
         >
             {/* Subtle red tint overlay for atmosphere */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-[var(--color-ortecha-main)]/5 via-transparent to-transparent opacity-50"></div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div className="order-2 lg:order-1 space-y-8">
-                    <h2 className="text-2xl md:text-3xl font-medium text-gray-500 uppercase tracking-widest">
+                    <h2 
+                        ref={subtitleRef}
+                        className="text-2xl md:text-3xl font-medium text-gray-500 uppercase tracking-widest"
+                    >
                         Data made human
                     </h2>
                     <h1
@@ -89,7 +100,7 @@ export function Hero() {
                     <div ref={btnRef} className="flex flex-wrap gap-4 pt-4">
                         <Link
                             href="/solutions"
-                            className="group px-8 py-4 bg-[var(--color-ortecha-main)] text-white rounded-full font-semibold text-lg hover:bg-[var(--color-ortecha-dark-red)] transition-all flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-1"
+                            className="group px-8 py-4 bg-[var(--color-ortecha-main)] text-white rounded-full font-semibold text-lg hover:bg-[var(--color-ortecha-dark-red)] transition-all flex items-center gap-2 shadow-lg hover:shadow-xl"
                         >
                             Our Solutions
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

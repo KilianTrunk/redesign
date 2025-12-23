@@ -28,6 +28,12 @@ const CARDS = [
         image: "https://ortecha.com/wp-content/uploads/2025/10/Enterprise-Architecture-Header-Ortecha-Solutions-no-donut.webp",
         href: "/solutions",
     },
+    {
+        title: "Literacy & Culture",
+        subtitle: "You’ve invested in data and AI. Now turn your people into the advantage that drives your next wave of growth.",
+        image: "https://ortecha.com/wp-content/uploads/2025/10/Training-Adoption-Header.webp",
+        href: "/solutions",
+    },
 ];
 
 export function ParallaxCards() {
@@ -35,23 +41,17 @@ export function ParallaxCards() {
 
     useGSAP(
         () => {
-            const cards = gsap.utils.toArray(".parallax-card-item");
+            const wrappers = gsap.utils.toArray(".parallax-wrapper");
 
-            cards.forEach((card: any, index: number) => {
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 85%",
-                        end: "bottom 15%",
-                        toggleActions: "play none none reverse",
-                    },
-                });
+            wrappers.forEach((wrapper: any, index: number) => {
+                const card = wrapper.querySelector(".parallax-card-item");
 
-                tl.fromTo(
-                    card,
+                // Entrance Animation on the WRAPPER (Opacity, Scale, Rotation)
+                gsap.fromTo(
+                    wrapper,
                     {
                         opacity: 0,
-                        y: 100,
+                        y: 50,
                         rotationX: -15,
                         scale: 0.9,
                     },
@@ -63,14 +63,21 @@ export function ParallaxCards() {
                         duration: 1.2,
                         ease: "power3.out",
                         delay: index * 0.2,
+                        scrollTrigger: {
+                            trigger: wrapper,
+                            start: "top 85%",
+                            end: "bottom 15%",
+                            toggleActions: "play none none none", // Ensure it stays visible
+                        },
                     }
                 );
 
+                // Parallax Scrub on the INNER CARD
                 gsap.to(card, {
                     y: -30,
                     ease: "none",
                     scrollTrigger: {
-                        trigger: card,
+                        trigger: wrapper,
                         start: "top bottom",
                         end: "bottom top",
                         scrub: 1,
@@ -151,44 +158,42 @@ export function ParallaxCards() {
             ease: "power3.out", // Elastic might be too much for content/bg
             overwrite: "auto"
         });
-        
-        // Ensure bg resets to cover if needed, but scale 1 is probably fine if CSS sets it.
-        // Actually the original code reset everything with elastic.
-        // Let's keep it simple but separate to avoid "transform: none" glitch.
     };
 
     return (
         <Section ref={containerRef} className="py-20 bg-white">
             <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {CARDS.map((card, index) => (
-                        <Link key={index} href={card.href} className="block parallax-card-item">
-                            <div
-                                className="relative h-[400px] w-full rounded-2xl overflow-hidden cursor-pointer group shadow-lg hover:shadow-2xl transition-shadow"
-                                onMouseMove={handleMouseMove}
-                                onMouseLeave={handleMouseLeave}
-                            >
-                                {/* Background Image */}
+                        <div key={index} className="parallax-wrapper">
+                            <Link href={card.href} className="block parallax-card-item">
                                 <div
-                                    className="card-bg absolute inset-0 bg-cover bg-center transition-transform duration-700"
-                                    style={{ backgroundImage: `url(${card.image})` }}
-                                />
+                                    className="relative h-[400px] w-full rounded-2xl overflow-hidden cursor-pointer group shadow-lg hover:shadow-2xl transition-shadow"
+                                    onMouseMove={handleMouseMove}
+                                    onMouseLeave={handleMouseLeave}
+                                >
+                                    {/* Background Image */}
+                                    <div
+                                        className="card-bg absolute inset-0 bg-cover bg-center transition-transform duration-700"
+                                        style={{ backgroundImage: `url(${card.image})` }}
+                                    />
 
-                                {/* Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-70" />
+                                    {/* Overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-70" />
 
-                                {/* Content */}
-                                <div className="card-content absolute bottom-0 left-0 w-full p-8 text-white transform transition-transform">
-                                    <h3 className="text-2xl font-bold mb-3">{card.title}</h3>
-                                    <p className="text-sm text-gray-200 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                                        {card.subtitle}
-                                    </p>
-                                    <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-ortecha-light-green-cyan)] opacity-0 group-hover:opacity-100 transition-all duration-300 delay-75">
-                                        Explore <span className="text-lg">→</span>
+                                    {/* Content */}
+                                    <div className="card-content absolute bottom-0 left-0 w-full p-8 text-white transform transition-transform">
+                                        <h3 className="text-2xl font-bold mb-3">{card.title}</h3>
+                                        <p className="text-sm text-gray-200 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                                            {card.subtitle}
+                                        </p>
+                                        <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-ortecha-main)] opacity-0 group-hover:opacity-100 transition-all duration-300 delay-75">
+                                            Explore <span className="text-lg">→</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
                     ))}
                 </div>
             </div>
