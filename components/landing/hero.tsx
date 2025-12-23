@@ -87,8 +87,7 @@ export function Hero() {
                         ref={titleRef}
                         className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1]"
                     >
-                        When you trust your <span className="text-[var(--color-ortecha-main)]">data</span>,<br />
-                        everything else becomes possible.
+                        When you trust your <span className="text-[var(--color-ortecha-main)]">data</span>, everything else becomes possible.
                     </h1>
                     <p
                         ref={textRef}
