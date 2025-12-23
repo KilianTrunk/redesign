@@ -55,6 +55,20 @@ const NEWS_ITEMS = [
         excerpt: "Expanding our North American footprint with the addition of Wellington Consulting Group.",
         href: "/resources",
     },
+    {
+        title: "DCAM® v3: The New Gold Standard for Data Management",
+        date: "22 Jun",
+        image: "https://ortecha.com/wp-content/uploads/2025/07/DCAM-v3-Blog-Header-1024x576.png",
+        excerpt: "The EDM Association recently released their DCAM v3 framework. Why it should be on the radar of every data leader.",
+        href: "/resources",
+    },
+    {
+        title: "What Toy Story, Pixar, Steve Jobs and Data Functions Have In Common",
+        date: "18 May",
+        image: "https://ortecha.com/wp-content/uploads/2025/06/Storytelling-blog-1024x576.png",
+        excerpt: "How data teams can move beyond numbers to create narratives that connect, inspire action, and make insights unforgettable.",
+        href: "/resources",
+    },
 ];
 
 export function LatestNews() {

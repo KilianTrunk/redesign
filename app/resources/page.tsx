@@ -19,6 +19,22 @@ const RESOURCES = [
         href: "#",
     },
     {
+        category: "News",
+        title: "Ortecha Appoints Two UK Partners",
+        description: "Ortecha continues its expansion with key leadership appointments in the UK as growth momentum continues.",
+        date: "Dec 2025",
+        image: "/images/news/london-skyline.png",
+        href: "#",
+    },
+    {
+        category: "News",
+        title: "Ortecha welcomes Stephen Gatchell",
+        description: "Stephen brings deep expertise to lead our AI strategy practice as Partner and Head of AI Strategy.",
+        date: "Nov 2025",
+        image: "/images/news/obg-press-release.png",
+        href: "#",
+    },
+    {
         category: "Events & Webinars",
         title: "Mastering Data Lineage for Risk, Compliance and AI Governance",
         description: "Join us for this on-demand webinar where we explore how to master data lineage.",
