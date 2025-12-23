@@ -12,6 +12,7 @@ import { ThreeMarketChart } from "@/components/landing/three-market-chart";
 export function Hero() {
     const containerRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
+    const subtitleRef = useRef<HTMLHeadingElement>(null);
     const textRef = useRef<HTMLParagraphElement>(null);
     const btnRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
@@ -32,12 +33,17 @@ export function Hero() {
             // Removed scrollTrigger scrub logic to prevent "disappearing content" bug on scroll up.
             // This ensures content is always visible after initial load.
 
-            tl.from(titleRef.current, {
+            tl.from(subtitleRef.current, {
+                y: 20,
+                opacity: 0,
+                duration: 0.8,
+            })
+            .from(titleRef.current, {
                 y: 100,
                 opacity: 0,
                 duration: 1.2,
                 ease: "power4.out",
-            })
+            }, "-=0.6")
                 .from(textRef.current, {
                     y: 50,
                     opacity: 0,
@@ -71,7 +77,10 @@ export function Hero() {
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-[var(--color-ortecha-main)]/5 via-transparent to-transparent opacity-50"></div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div className="order-2 lg:order-1 space-y-8">
-                    <h2 className="text-2xl md:text-3xl font-medium text-gray-500 uppercase tracking-widest">
+                    <h2 
+                        ref={subtitleRef}
+                        className="text-2xl md:text-3xl font-medium text-gray-500 uppercase tracking-widest"
+                    >
                         Data made human
                     </h2>
                     <h1
