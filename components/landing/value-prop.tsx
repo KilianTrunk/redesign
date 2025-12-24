@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Section } from "@/components/ui/section";
+import { Play } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,6 +15,8 @@ export function ValueProp() {
     const containerRef = useRef<HTMLDivElement>(null);
     const textRef = useRef<HTMLDivElement>(null);
     const visualRef = useRef<HTMLDivElement>(null);
+
+    const [isPlaying, setIsPlaying] = useState(false);
 
     useGSAP(
         () => {
@@ -86,14 +89,34 @@ export function ValueProp() {
                 </div>
 
                 <div ref={visualRef} className="order-1 lg:order-2 flex justify-center items-center">
-                    <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                        <Image
-                            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
-                            alt="Data Analytics Dashboard"
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                        />
+                    <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl bg-black">
+                        {!isPlaying ? (
+                            <div 
+                                className="relative w-full h-full cursor-pointer group"
+                                onClick={() => setIsPlaying(true)}
+                            >
+                                <Image
+                                    src="https://ortecha.com/wp-content/uploads/2025/11/Data-AI-Strategy-Pocket-Guide-Overlay-Ortecha.png"
+                                    alt="Ortecha's Pocket Guide to Data & AI Strategy"
+                                    fill
+                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                />
+                                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                    <div className="w-20 h-20 bg-[var(--color-ortecha-main)] text-white rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                                        <Play className="w-8 h-8 ml-1 fill-white" />
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <iframe 
+                                className="w-full h-full"
+                                src="https://www.youtube.com/embed/N5DFe5qzx6s?autoplay=1&rel=0" 
+                                title="Ortecha's Pocket Guide to Data & AI Strategy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowFullScreen
+                            ></iframe>
+                        )}
                     </div>
                 </div>
             </div>

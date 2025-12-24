@@ -65,54 +65,74 @@ export function NewsSection() {
             <div ref={triggerRef} className="container mx-auto px-4 max-w-6xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Merger News Card */}
-                    <div className="news-card flex flex-col justify-between p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-3 mb-4">
-                                <span className="p-2 bg-red-50 text-[var(--color-ortecha-main)] rounded-lg">
-                                    <Newspaper className="w-5 h-5" />
-                                </span>
-                                <span className="text-sm font-bold tracking-wider text-[var(--color-ortecha-main)] uppercase">Latest News</span>
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-[var(--color-ortecha-main)] transition-colors">
-                                Ortecha and Broadgate Consultants Announce Merger
-                            </h3>
-                            <p className="text-gray-600">
-                                Uniting their Data & Technology Expertise to deliver unparalleled value.
-                            </p>
+                    <div className="news-card flex flex-col rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow group overflow-hidden">
+                        <div className="relative h-56 w-full overflow-hidden">
+                            <Image
+                                src="https://ortecha.com/wp-content/uploads/2025/10/OBG-Press-Release.png"
+                                alt="Ortecha and Broadgate Merger"
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
                         </div>
-                        <div className="pt-8">
-                            <Link
-                                href="/resources"
-                                className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 group-hover:text-[var(--color-ortecha-main)] transition-colors"
-                            >
-                                Read announcement <ArrowRight className="w-4 h-4" />
-                            </Link>
+                        <div className="flex flex-col justify-between p-8 flex-grow">
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <span className="p-2 bg-red-50 text-[var(--color-ortecha-main)] rounded-lg">
+                                        <Newspaper className="w-5 h-5" />
+                                    </span>
+                                    <span className="text-sm font-bold tracking-wider text-[var(--color-ortecha-main)] uppercase">Latest News</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-[var(--color-ortecha-main)] transition-colors">
+                                    Ortecha and Broadgate Consultants Announce Merger
+                                </h3>
+                                <p className="text-gray-600">
+                                    Uniting their Data & Technology Expertise to deliver unparalleled value.
+                                </p>
+                            </div>
+                            <div className="pt-8 mt-auto">
+                                <Link
+                                    href="/resources"
+                                    className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[var(--color-ortecha-main)] border border-gray-200 rounded-full font-semibold text-lg hover:border-[var(--color-ortecha-main)] hover:bg-red-50 transition-all group-hover:shadow-md"
+                                >
+                                    Read announcement <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </div>
                         </div>
                     </div>
 
                     {/* Whitepaper Card */}
-                    <div className="news-card flex flex-col justify-between p-8 rounded-2xl bg-gradient-to-br from-[var(--color-ortecha-main)]/5 to-white border border-[var(--color-ortecha-main)]/10 shadow-sm hover:shadow-md transition-shadow group">
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-3 mb-4">
-                                <span className="p-2 bg-white text-[var(--color-ortecha-main)] rounded-lg shadow-sm">
-                                    <FileText className="w-5 h-5" />
-                                </span>
-                                <span className="text-sm font-bold tracking-wider text-[var(--color-ortecha-main)] uppercase">Featured Whitepaper</span>
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-[var(--color-ortecha-main)] transition-colors">
-                                Data Management That Thinks
-                            </h3>
-                            <p className="text-gray-600">
-                                Leveraging AI and automation to deliver verifiable and intelligent governance at scale.
-                            </p>
+                    <div className="news-card flex flex-col rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow group overflow-hidden">
+                        <div className="relative h-56 w-full overflow-hidden">
+                            <Image
+                                src="https://ortecha.com/wp-content/uploads/2025/11/Data-Management-that-Thinks-Header.png"
+                                alt="Data Management That Thinks"
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
                         </div>
-                        <div className="pt-8">
-                            <Link
-                                href="/resources"
-                                className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 group-hover:text-[var(--color-ortecha-main)] transition-colors"
-                            >
-                                Get your copy <ArrowRight className="w-4 h-4" />
-                            </Link>
+                        <div className="flex flex-col justify-between p-8 flex-grow">
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <span className="p-2 bg-red-50 text-[var(--color-ortecha-main)] rounded-lg shadow-sm">
+                                        <FileText className="w-5 h-5" />
+                                    </span>
+                                    <span className="text-sm font-bold tracking-wider text-[var(--color-ortecha-main)] uppercase">Featured Whitepaper</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-[var(--color-ortecha-main)] transition-colors">
+                                    Data Management That Thinks
+                                </h3>
+                                <p className="text-gray-600">
+                                    Leveraging AI and automation to deliver verifiable and intelligent governance at scale.
+                                </p>
+                            </div>
+                            <div className="pt-8 mt-auto">
+                                <Link
+                                    href="/resources"
+                                    className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[var(--color-ortecha-main)] border border-gray-200 rounded-full font-semibold text-lg hover:border-[var(--color-ortecha-main)] hover:bg-red-50 transition-all group-hover:shadow-md"
+                                >
+                                    Get your copy <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>

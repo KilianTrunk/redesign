@@ -23,7 +23,7 @@ const NEWS_ITEMS = [
     {
         title: "Ortecha and Broadgate Consultants have today announced their merger",
         date: "04 Nov",
-        image: "/images/news/obg-press-release.png",
+        image: "https://ortecha.com/wp-content/uploads/2025/11/Wellington-joins-Ortecha-PR.png",
         excerpt: "Uniting data and technology expertise to deliver a unified business transformation approach.",
         href: "/resources",
     },

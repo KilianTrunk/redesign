@@ -29,7 +29,7 @@ export function SolutionsIntro() {
 
             tl.fromTo(
                 contentRef.current,
-                { opacity: 0, x: -50 },
+                { opacity: 0, x: 50 },
                 {
                     opacity: 1,
                     x: 0,
@@ -76,7 +76,7 @@ export function SolutionsIntro() {
             ></div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-                <div ref={contentRef} className="px-4 space-y-8 order-2 lg:order-1">
+                <div ref={contentRef} className="px-4 space-y-8 order-2 lg:order-2">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
                         Every data & AI journey looks different
                     </h2>
@@ -94,7 +94,7 @@ export function SolutionsIntro() {
                     </div>
                 </div>
 
-                <div ref={visualRef} className="order-1 lg:order-2 flex justify-center items-center">
+                <div ref={visualRef} className="order-1 lg:order-1 flex justify-center items-center">
                     <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
                         <Image
                             src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"

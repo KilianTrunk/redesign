@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
@@ -16,6 +17,7 @@ const NAV_ITEMS = [
 ];
 
 export function Header() {
+    const pathname = usePathname();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -67,16 +69,27 @@ export function Header() {
 
                 {/* Desktop Nav */}
                 <nav className="hidden lg:flex items-center gap-12">
-                    {NAV_ITEMS.map((item) => (
-                        <Link
-                            key={item.label}
-                            href={item.href}
-                            className="text-xl font-semibold text-[#343434] hover:text-[var(--color-ortecha-main)] transition-colors relative group"
-                        >
-                            {item.label}
-                            <span className="absolute left-1/2 -bottom-1 w-0 h-0.5 bg-[var(--color-ortecha-main)] transition-all duration-300 group-hover:w-full group-hover:left-0" />
-                        </Link>
-                    ))}
+                    {NAV_ITEMS.map((item) => {
+                        const isActive = pathname === item.href;
+                        return (
+                            <Link
+                                key={item.label}
+                                href={item.href}
+                                className={cn(
+                                    "text-xl font-semibold transition-colors relative group",
+                                    isActive ? "text-[var(--color-ortecha-main)]" : "text-[#343434] hover:text-[var(--color-ortecha-main)]"
+                                )}
+                            >
+                                {item.label}
+                                <span 
+                                    className={cn(
+                                        "absolute left-1/2 -bottom-1 h-0.5 bg-[var(--color-ortecha-main)] transition-all duration-300",
+                                        isActive ? "w-full left-0" : "w-0 group-hover:w-full group-hover:left-0"
+                                    )} 
+                                />
+                            </Link>
+                        );
+                    })}
                 </nav>
 
                 <div className="hidden lg:flex items-center gap-4">

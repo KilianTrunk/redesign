@@ -1,5 +1,4 @@
 import { Hero } from "@/components/landing/hero";
-import { NewsSection } from "@/components/landing/news-section";
 import { ValueProp } from "@/components/landing/value-prop";
 import { SolutionsIntro } from "@/components/landing/solutions-intro";
 import { ParallaxCards } from "@/components/landing/parallax-cards";
@@ -13,7 +12,6 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-0 overflow-hidden w-full">
       <Hero />
-      <NewsSection />
       <ValueProp />
       <SolutionsIntro />
       <ParallaxCards />
