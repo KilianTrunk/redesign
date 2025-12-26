@@ -42,7 +42,7 @@ export function CTA() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div className="flex justify-center items-center min-h-[280px] sm:min-h-[400px] lg:min-h-[500px] order-2 lg:order-1 px-4 sm:px-8 md:px-12 lg:px-20 py-8 sm:py-16 lg:py-24">
-                    <div className="w-full h-[280px] sm:h-[400px] lg:h-[500px]">
+                    <div className="w-full h-[280px] sm:h-[400px] lg:h-[400px]">
                         <ThreeOrb className="w-full h-full" />
                     </div>
                 </div>
