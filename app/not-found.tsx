@@ -39,14 +39,6 @@ export default function NotFound() {
                                 Go Home
                             </Link>
 
-                            <button
-                                onClick={() => window.history.back()}
-                                className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-gray-200 text-gray-700 font-semibold rounded-xl hover:border-gray-300 hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl text-lg"
-                            >
-                                <ArrowLeft className="w-5 h-5" />
-                                Go Back
-                            </button>
-
                             <Link
                                 href="/contact-us"
                                 className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-gray-200 text-gray-700 font-semibold rounded-xl hover:border-gray-300 hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl text-lg"
