@@ -80,7 +80,7 @@ export function SolutionsIntro() {
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
                         How we work with you
                     </h2>
-                    <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-12">
+                    <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-16">
                         Without a clear approach, data efforts fragment. "Urgent" drowns out "important." Investment leaks into silos and value gets lost.
                     </p>
 
@@ -90,15 +90,15 @@ export function SolutionsIntro() {
                         </p>
                         <ul className="space-y-2.5 text-base md:text-lg text-gray-300">
                             <li className="flex items-start gap-3">
-                                <span className="text-[var(--color-ortecha-main)] mt-1 flex-shrink-0">→</span>
+                                <span className="text-[var(--color-ortecha-main)] flex-shrink-0">-</span>
                                 <span>A clear value path showing where Data & AI create tangible outcomes</span>
                             </li>
                             <li className="flex items-start gap-3">
-                                <span className="text-[var(--color-ortecha-main)] mt-1 flex-shrink-0">→</span>
+                                <span className="text-[var(--color-ortecha-main)] flex-shrink-0">-</span>
                                 <span>Laser focus on initiatives that will actually move the dial</span>
                             </li>
                             <li className="flex items-start gap-3">
-                                <span className="text-[var(--color-ortecha-main)] mt-1 flex-shrink-0">→</span>
+                                <span className="text-[var(--color-ortecha-main)] flex-shrink-0">-</span>
                                 <span>A roadmap that flexes and adapts as your business shifts</span>
                             </li>
                         </ul>

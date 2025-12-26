@@ -248,7 +248,7 @@ export default function AboutPage() {
             <Section className="bg-gray-50" id="ourpeople">
                 <div ref={teamRef} className="text-center max-w-3xl mx-auto mb-16">
                     <h2 className="text-4xl font-bold text-gray-900 mb-6">Our People</h2>
-                    <p className="text-xl text-gray-600">
+                    <p className="text-xl text-gray-600 hidden md:block">
                         Our leadership team brings a great range of diverse backgrounds. What unites them? A drive to make data make sense and to be truly valuable.
                     </p>
                 </div>
@@ -263,7 +263,7 @@ export default function AboutPage() {
                 <LatestNews />
             </Section>
 
-            <CTA />
+            <CTA animate={false} />
         </div>
     );
 }
