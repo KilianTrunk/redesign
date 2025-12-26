@@ -114,9 +114,12 @@ const TEAM = [
 
 export function TeamGrid() {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 auto-rows-fr">
             {TEAM.map((member, index) => (
-                <div key={index} className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-[var(--color-ortecha-main)]/30">
+                <div
+                    key={index}
+                    className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-[var(--color-ortecha-main)]/30 flex flex-col h-full"
+                >
                     {/* Image Section */}
                     <div className="relative w-full aspect-square bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden p-4">
                         {member.image ? (
@@ -148,14 +151,15 @@ export function TeamGrid() {
                     </div>
 
                     {/* Content Section */}
-                    <div className="p-5">
-                        <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-[var(--color-ortecha-main)] transition-colors duration-300">
+                    <div className="p-4 sm:p-5 flex flex-col">
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 leading-tight group-hover:text-[var(--color-ortecha-main)] transition-colors duration-300 line-clamp-2">
                             {member.name}
                         </h3>
-                        <p className="text-[var(--color-ortecha-main)] font-semibold text-xs mb-3 uppercase tracking-wide">
+                        <p className="text-[var(--color-ortecha-main)] font-semibold text-[10px] sm:text-xs mt-1 uppercase tracking-wide leading-snug line-clamp-2">
                             {member.role}
                         </p>
-                        <div className="h-px bg-gradient-to-r from-[var(--color-ortecha-main)] via-[var(--color-ortecha-main)]/50 to-transparent mb-3" />
+                        {/* Divider adds a lot of perceived empty space on mobile */}
+                        <div className="hidden md:block h-px bg-gradient-to-r from-[var(--color-ortecha-main)] via-[var(--color-ortecha-main)]/50 to-transparent my-3" />
                         <p className="text-gray-600 text-sm leading-relaxed hidden md:block">
                             {member.description}
                         </p>
