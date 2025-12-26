@@ -32,9 +32,8 @@ export function Timeline() {
             const elapsed = timestamp - startTime;
             const progress = (elapsed % duration) / duration;
 
-            // Smooth easing function
-            const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-            const easedProgress = easeInOutCubic(progress);
+            // Smooth easing function - linear for consistent speed
+            const easedProgress = progress;
 
             container.scrollLeft = easedProgress * totalWidth;
 
