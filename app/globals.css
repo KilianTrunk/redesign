@@ -67,6 +67,17 @@ body {
   /* Apple's tight tracking */
 }
 
+/* Prevent accidental horizontal overflow + reduce "rubber band" background exposure */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  background: var(--background);
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
+}
+
 /* Glassmorphism Utilities */
 .glass {
   background: rgba(255, 255, 255, 0.7);

@@ -1,15 +1,30 @@
 "use client";
 
-import { useRef, useState, useEffect, Suspense } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Torus, MeshDistortMaterial, Float } from "@react-three/drei";
 import * as THREE from "three";
 
+function FirstFrame({ onFirstFrame }: { onFirstFrame: () => void }) {
+    const didFireRef = useRef(false);
+    useFrame(() => {
+        if (didFireRef.current) return;
+        didFireRef.current = true;
+        onFirstFrame();
+    });
+    return null;
+}
+
 function AnimatedSphere({ scale }: { scale: number }) {
     const sphereRef = useRef<THREE.Mesh>(null);
+    const accRef = useRef(0);
 
-    useFrame((state) => {
+    // Throttle updates (~45fps) to keep motion smooth without burning CPU/GPU.
+    useFrame((state, delta) => {
         if (!sphereRef.current) return;
+        accRef.current += delta;
+        if (accRef.current < 1 / 45) return;
+        accRef.current = 0;
         const time = state.clock.getElapsedTime();
         sphereRef.current.rotation.x = Math.sin(time * 0.3) * 0.2;
         sphereRef.current.rotation.y = Math.sin(time * 0.5) * 0.5;
@@ -17,121 +32,37 @@ function AnimatedSphere({ scale }: { scale: number }) {
 
     return (
         <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
+            {/* Higher segments = smoother silhouette/rounded edges */}
             <Torus ref={sphereRef} args={[1, 0.6, 128, 64]} scale={scale}>
                 <MeshDistortMaterial
                     color="#CE2E2F"
                     attach="material"
-                    distort={0.1}
-                    speed={1}
+                    distort={0.12}
+                    speed={1.15}
+                    flatShading={false}
                     roughness={0.1}
                     metalness={0.3}
                     emissive="#CE2E2F"
-                    emissiveIntensity={0.3}
+                    emissiveIntensity={0.35}
                 />
             </Torus>
         </Float>
     );
 }
 
-// Fallback component when Three.js fails to load
-function ThreeOrbFallback({ className }: { className?: string }) {
-    return (
-        <div className={`w-full h-full flex items-center justify-center ${className}`}>
-            <div className="w-32 h-32 bg-gradient-to-br from-red-100 to-red-200 rounded-full flex items-center justify-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-red-200 to-red-300 rounded-full flex items-center justify-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-red-300 to-red-400 rounded-full animate-pulse"></div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-// Loading component
-function ThreeOrbLoading({ className }: { className?: string }) {
-    return (
-        <div className={`w-full h-full flex items-center justify-center ${className}`}>
-            <div className="w-32 h-32 border-4 border-red-200 border-t-red-500 rounded-full animate-spin"></div>
-        </div>
-    );
-}
-
-function ThreeOrbCanvas({ scale, className }: { scale: number; className?: string }) {
-    const [hasError, setHasError] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        // Set loaded after a short delay to ensure DOM is ready and Lenis has settled
-        const timer = setTimeout(() => setIsLoaded(true), 200);
-        return () => clearTimeout(timer);
-    }, []);
-
-    // Force a resize event to ensure Three.js canvas resizes properly
-    useEffect(() => {
-        if (isLoaded && !hasError) {
-            const handleResize = () => {
-                // Small delay to ensure DOM has updated
-                setTimeout(() => {
-                    window.dispatchEvent(new Event('resize'));
-                }, 50);
-            };
-
-            // Trigger resize after component mounts
-            handleResize();
-
-            // Also listen for actual resize events
-            window.addEventListener('resize', handleResize);
-            return () => window.removeEventListener('resize', handleResize);
-        }
-    }, [isLoaded, hasError]);
-
-    if (!isLoaded) {
-        return <ThreeOrbLoading className={className} />;
-    }
-
-    if (hasError) {
-        return <ThreeOrbFallback className={className} />;
-    }
-
-    return (
-        <div ref={containerRef} className={`w-full h-full ${className}`}>
-            <Canvas
-                camera={{ position: [0, 0, 4.5], fov: 45 }}
-                gl={{
-                    alpha: true,
-                    antialias: true,
-                    powerPreference: "high-performance",
-                    failIfMajorPerformanceCaveat: false // Allow fallback if performance is poor
-                }}
-                onError={() => setHasError(true)}
-                dpr={Math.min(window.devicePixelRatio, 2)} // Limit pixel ratio
-                frameloop="always" // Ensure continuous rendering
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    pointerEvents: 'none' // Don't capture pointer events to allow scrolling
-                }}
-            >
-                <ambientLight intensity={3} />
-                <directionalLight position={[5, 10, 7]} intensity={2} color="#ffffff" />
-                <directionalLight position={[-5, -5, -5]} intensity={1.5} color="#ffcccc" />
-                <pointLight position={[0, 0, 2]} intensity={1} color="#ff9999" />
-                <AnimatedSphere scale={scale} />
-            </Canvas>
-        </div>
-    );
-}
-
 export function ThreeOrb({ className }: { className?: string }) {
     const [scale, setScale] = useState(1.0);
-    const [isMounted, setIsMounted] = useState(false);
+    const [isReady, setIsReady] = useState(false);
+    const [hasFirstFrame, setHasFirstFrame] = useState(false);
 
     useEffect(() => {
-        setIsMounted(true);
+        // Prevent hydration issues by ensuring component only renders after mount
+        setIsReady(true);
+        setHasFirstFrame(false);
 
         const handleResize = () => {
             if (window.innerWidth < 450) {
-                setScale(0.75); // 25% smaller
+                setScale(0.75);
             } else {
                 setScale(1.0);
             }
@@ -145,14 +76,53 @@ export function ThreeOrb({ className }: { className?: string }) {
         };
     }, []);
 
-    // Don't render anything until component is mounted to prevent hydration issues
-    if (!isMounted) {
-        return <ThreeOrbLoading className={className} />;
+    // R3F sometimes needs an explicit resize after mount (especially with smooth-scrollers that
+    // apply transforms). This is cheap and avoids the “blank canvas for ~10s” symptom.
+    useEffect(() => {
+        if (!isReady) return;
+        const raf = window.requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
+        const t = window.setTimeout(() => window.dispatchEvent(new Event("resize")), 250);
+        return () => {
+            window.cancelAnimationFrame(raf);
+            window.clearTimeout(t);
+        };
+    }, [isReady]);
+
+    if (!isReady) {
+        return <div className={`w-full h-full ${className ?? ""}`} />;
     }
 
     return (
-        <Suspense fallback={<ThreeOrbLoading className={className} />}>
-            <ThreeOrbCanvas scale={scale} className={className} />
-        </Suspense>
+        <div
+            className={`w-full h-full relative transition-all duration-700 ease-out ${
+                hasFirstFrame ? "opacity-100 scale-100" : "opacity-0 scale-[0.98]"
+            } ${className ?? ""}`}
+        >
+            <Canvas
+                camera={{ position: [0, 0, 4.5], fov: 45 }}
+                gl={{
+                    alpha: true,
+                    antialias: true,
+                    powerPreference: "high-performance",
+                }}
+                // Slightly higher floor so edges stay smooth on high-DPI displays
+                dpr={[1.25, 2]}
+                frameloop="always"
+                // Don't allocate/observe events we don't use
+                eventSource={undefined}
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    pointerEvents: "none"
+                }}
+            >
+                <FirstFrame onFirstFrame={() => setHasFirstFrame(true)} />
+                <ambientLight intensity={2.6} />
+                <directionalLight position={[5, 10, 7]} intensity={2} color="#ffffff" />
+                <directionalLight position={[-5, -5, -5]} intensity={1.2} color="#ffcccc" />
+                <pointLight position={[0, 0, 2]} intensity={0.8} color="#ff9999" />
+                <AnimatedSphere scale={scale} />
+            </Canvas>
+        </div>
     );
 }

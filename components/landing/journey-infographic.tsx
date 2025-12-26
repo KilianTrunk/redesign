@@ -77,8 +77,10 @@ export function JourneyInfographic() {
                     ease: "power2.inOut",
                     scrollTrigger: {
                         trigger: containerRef.current,
-                        start: "top 60%",
+                        // Start earlier so it feels responsive while scrolling
+                        start: "top 80%",
                         toggleActions: "play none none reverse",
+                        invalidateOnRefresh: true,
                     },
                 });
             }
@@ -100,10 +102,13 @@ export function JourneyInfographic() {
                             ease: "back.out(1.7)",
                             scrollTrigger: {
                                 trigger: containerRef.current,
-                                start: "top 60%",
+                                // Start earlier so nodes appear sooner
+                                start: "top 80%",
                                 toggleActions: "play none none reverse",
+                                invalidateOnRefresh: true,
                             },
-                            delay: 0.5 + index * 0.3,
+                            // Tighten timing so it doesn't feel like it "waits" after entering view
+                            delay: 0.2 + index * 0.18,
                         }
                     );
                 }

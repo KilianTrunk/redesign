@@ -13,6 +13,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutPage() {
+    const pageRef = useRef<HTMLDivElement>(null);
     const heroRef = useRef<HTMLDivElement>(null);
     const storyRef = useRef<HTMLDivElement>(null);
     const valuesRef = useRef<HTMLDivElement>(null);
@@ -124,10 +125,10 @@ export default function AboutPage() {
                 },
             }
         );
-    });
+    }, { scope: pageRef });
 
     return (
-        <div className="pt-24 overflow-x-hidden">
+        <div ref={pageRef} className="pt-24 overflow-x-hidden">
             {/* Hero Section */}
             <Section className="bg-gray-50">
                 <div ref={heroRef} className="max-w-4xl">

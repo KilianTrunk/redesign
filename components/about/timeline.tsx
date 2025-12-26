@@ -112,8 +112,6 @@ export function Timeline() {
         container.addEventListener('mousemove', handleMouseMove);
         container.addEventListener('mouseup', handleMouseUp);
         container.addEventListener('mouseleave', handleMouseLeave);
-        container.addEventListener('touchstart', handleUserInteraction);
-        container.addEventListener('wheel', handleUserInteraction);
 
         // Start initial animation
         startAnimation();
@@ -127,8 +125,6 @@ export function Timeline() {
             container.removeEventListener('mousemove', handleMouseMove);
             container.removeEventListener('mouseup', handleMouseUp);
             container.removeEventListener('mouseleave', handleMouseLeave);
-            container.removeEventListener('touchstart', handleUserInteraction);
-            container.removeEventListener('wheel', handleUserInteraction);
         };
     }, []);
 
