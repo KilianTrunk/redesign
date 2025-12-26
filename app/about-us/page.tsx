@@ -127,7 +127,7 @@ export default function AboutPage() {
     });
 
     return (
-        <div className="pt-24">
+        <div className="pt-24 overflow-x-hidden">
             {/* Hero Section */}
             <Section className="bg-gray-50">
                 <div ref={heroRef} className="max-w-4xl">

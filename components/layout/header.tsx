@@ -67,13 +67,13 @@ export function Header() {
             ref={headerRef}
             style={{ transform: 'translateY(-100px)', opacity: 0 }}
             className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4",
+                "fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 py-4",
                 isScrolled
                     ? "bg-white/95 backdrop-blur-md shadow-md border-b border-gray-100"
                     : "bg-transparent border-transparent"
             )}
         >
-            <div className="container mx-auto px-4 md:px-6 flex items-center justify-between min-h-[56px] md:min-h-[64px]">
+            <div className="container mx-auto px-4 md:px-6 flex items-center min-h-[56px] md:min-h-[64px]">
                 <Link href="/" className="relative z-[70] flex items-center gap-2">
                     <Image
                         src="/assets/logo.png"
@@ -86,7 +86,7 @@ export function Header() {
                 </Link>
 
                 {/* Desktop Nav - Right Aligned */}
-                <div className="hidden lg:flex items-center gap-8 xl:gap-12">
+                <div className="hidden lg:flex items-center gap-8 xl:gap-12 ml-auto">
                     <nav className="flex items-center gap-8 xl:gap-12">
                         {NAV_ITEMS.map((item) => {
                             const isActive = pathname === item.href;
@@ -121,7 +121,7 @@ export function Header() {
 
                 {/* Mobile Toggle */}
                 <button
-                    className="lg:hidden relative z-[70] p-2"
+                    className="lg:hidden absolute right-4 md:right-6 z-[70] p-2"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     {isMobileMenuOpen ? (
