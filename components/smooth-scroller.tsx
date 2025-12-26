@@ -45,15 +45,19 @@ export function SmoothScroller({ children }: { children: ReactNode }) {
                     // If user was scrolled down, do smooth animation
                     if (lastScrollPosition.current > 50) {
                         lenis.scrollTo(0, { duration: 0.8 });
+                    } else if (window.scrollY > 5) {
+                        // If user was slightly scrolled, do a subtle animation
+                        lenis.scrollTo(0, { duration: 0.3 });
                     } else {
-                        // If user was already near top, still do a subtle animation
-                        lenis.scrollTo(1, { duration: 0.1, immediate: true });
-                        setTimeout(() => lenis.scrollTo(0, { duration: 0.3 }), 50);
+                        // If user is already at top, don't scroll at all to avoid shaking
+                        console.log('Already at top, skipping scroll');
                     }
                 } else {
                     // Fallback to native scroll if lenis isn't ready
                     console.log('Using native scroll fallback');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    if (window.scrollY > 5) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
                 }
             };
 
