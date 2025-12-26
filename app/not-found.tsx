@@ -9,10 +9,6 @@ export default function NotFound() {
         <div className="pt-24">
             <Section className="bg-gray-50">
                 <div className="text-center max-w-4xl mx-auto">
-                    {/* Large 404 Number */}
-                    <div className="text-6xl md:text-7xl font-bold text-gray-200 mb-6 select-none">
-                        404
-                    </div>
 
                     {/* Main Content */}
                     <div className="relative">
@@ -58,17 +54,6 @@ export default function NotFound() {
                                 <Mail className="w-5 h-5" />
                                 Contact Us
                             </Link>
-                        </div>
-
-                        {/* Fun Footer Message */}
-                        <div className="mt-8 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
-                            <p className="text-gray-600 text-lg">
-                                If you believe this page should exist, please{" "}
-                                <Link href="/contact-us" className="text-[var(--color-ortecha-main)] hover:underline font-semibold">
-                                    let us know
-                                </Link>
-                                {" "}and we'll investigate! 🚀
-                            </p>
                         </div>
                     </div>
 
