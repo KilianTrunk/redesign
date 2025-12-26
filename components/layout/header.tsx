@@ -85,35 +85,35 @@ export function Header() {
                     />
                 </Link>
 
-                {/* Desktop Nav */}
-                <nav className="hidden lg:flex items-center gap-6 xl:gap-12">
-                    {NAV_ITEMS.map((item) => {
-                        const isActive = pathname === item.href;
-                        return (
-                            <Link
-                                key={item.label}
-                                href={item.href}
-                                className={cn(
-                                    "text-base xl:text-xl font-semibold transition-colors relative group",
-                                    isActive ? "text-[var(--color-ortecha-main)]" : "text-[#343434] hover:text-[var(--color-ortecha-main)]"
-                                )}
-                            >
-                                {item.label}
-                                <span
+                {/* Desktop Nav - Right Aligned */}
+                <div className="hidden lg:flex items-center gap-8 xl:gap-12">
+                    <nav className="flex items-center gap-8 xl:gap-12">
+                        {NAV_ITEMS.map((item) => {
+                            const isActive = pathname === item.href;
+                            return (
+                                <Link
+                                    key={item.label}
+                                    href={item.href}
                                     className={cn(
-                                        "absolute left-1/2 -bottom-1 h-0.5 bg-[var(--color-ortecha-main)] transition-all duration-300",
-                                        isActive ? "w-full left-0" : "w-0 group-hover:w-full group-hover:left-0"
+                                        "text-base xl:text-lg font-semibold transition-colors relative group",
+                                        isActive ? "text-[var(--color-ortecha-main)]" : "text-[#343434] hover:text-[var(--color-ortecha-main)]"
                                     )}
-                                />
-                            </Link>
-                        );
-                    })}
-                </nav>
+                                >
+                                    {item.label}
+                                    <span
+                                        className={cn(
+                                            "absolute left-1/2 -bottom-1 h-0.5 bg-[var(--color-ortecha-main)] transition-all duration-300",
+                                            isActive ? "w-full left-0" : "w-0 group-hover:w-full group-hover:left-0"
+                                        )}
+                                    />
+                                </Link>
+                            );
+                        })}
+                    </nav>
 
-                <div className="hidden lg:flex items-center gap-4">
                     <Link
                         href="/contact-us"
-                        className="px-6 xl:px-9 py-3 xl:py-4 bg-[var(--color-ortecha-main)] text-white text-base xl:text-xl font-bold rounded-full hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg duration-200"
+                        className="px-6 xl:px-8 py-3 xl:py-4 bg-[var(--color-ortecha-main)] text-white text-base xl:text-lg font-bold rounded-full hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg duration-200"
                     >
                         Contact Us
                     </Link>
