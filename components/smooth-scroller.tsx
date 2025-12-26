@@ -88,7 +88,6 @@ export function SmoothScroller({ children }: { children: ReactNode }) {
                 smoothWheel: true,
                 touchMultiplier: 1.5, // Reduced touch multiplier
                 infinite: false,
-                normalizeWheel: true, // Better wheel normalization
             }}
         >
             {children}

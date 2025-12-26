@@ -19,7 +19,7 @@ const TIMELINE_EVENTS = [
 export function Timeline() {
     const scrollRef = useRef<HTMLDivElement>(null);
     const tweenRef = useRef<gsap.core.Tween | null>(null);
-    const inactivityTimeoutRef = useRef<NodeJS.Timeout>();
+    const inactivityTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const isAnimatingRef = useRef(false);
     const isDraggingRef = useRef(false);
     const startXRef = useRef(0);
