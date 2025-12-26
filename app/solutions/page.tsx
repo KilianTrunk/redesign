@@ -1,7 +1,15 @@
+"use client";
+
+import { useRef } from "react";
 import { Section } from "@/components/ui/section";
 import { SolutionCategory } from "@/components/solutions/solution-category";
 import { CTA } from "@/components/landing/cta";
 import Image from "next/image";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const CATEGORIES = [
   {
@@ -55,13 +63,85 @@ const CATEGORIES = [
 ];
 
 export default function SolutionsPage() {
+  const heroTextRef = useRef<HTMLDivElement>(null);
+  const heroImageRef = useRef<HTMLDivElement>(null);
+  const solutionsGridRef = useRef<HTMLDivElement>(null);
+  const approachRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Hero Text Animation
+    const heroTextChildren = gsap.utils.toArray(heroTextRef.current!.children);
+    gsap.fromTo(
+      heroTextChildren,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        delay: 0.3,
+      }
+    );
+
+    // Hero Image Animation
+    gsap.fromTo(
+      heroImageRef.current,
+      { opacity: 0, scale: 0.8, rotation: -10 },
+      {
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        duration: 1.5,
+        ease: "elastic.out(1, 0.5)",
+        delay: 0.5,
+      }
+    );
+
+    // Solutions Grid Animation
+    const gridItems = gsap.utils.toArray(solutionsGridRef.current!.children);
+    gsap.fromTo(
+      gridItems,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: solutionsGridRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+
+    // Approach Section Animation
+    const approachChildren = gsap.utils.toArray(approachRef.current!.children);
+    gsap.fromTo(
+      approachChildren,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: approachRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+  });
+
   return (
     <div className="pt-24">
 
       {/* Hero */}
       <Section className="bg-gray-50 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="max-w-4xl order-2 lg:order-1">
+          <div ref={heroTextRef} className="max-w-4xl order-2 lg:order-1">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight">
               Practical, no-jargon solutions that turn data complexity into <span className="text-[var(--color-ortecha-main)]">clarity</span>.
             </h1>
@@ -73,7 +153,7 @@ export default function SolutionsPage() {
             </p>
           </div>
           <div className="order-1 lg:order-2 flex justify-center">
-            <div className="relative w-full max-w-md aspect-square animate-float">
+            <div ref={heroImageRef} className="relative w-full max-w-md aspect-square animate-float">
               <Image
                 src="https://ortecha.com/wp-content/uploads/2025/10/Assess-Benchmark-Donut-Ortecha-Solutions-1022x1024.png"
                 alt="Ortecha Solutions Model"
@@ -89,7 +169,7 @@ export default function SolutionsPage() {
 
       {/* Solutions Grid */}
       <Section className="bg-white">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={solutionsGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {CATEGORIES.map((category, index) => (
             <SolutionCategory key={index} {...category} />
           ))}
@@ -98,7 +178,7 @@ export default function SolutionsPage() {
 
       {/* Approach */}
       <Section className="bg-gray-50">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div ref={approachRef} className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-6">How we work with you</h2>
             <div className="space-y-6 text-lg text-gray-600">

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 const TIMELINE_EVENTS = [
     { year: "2010", title: "Founded in the UK" },
@@ -17,35 +18,117 @@ const TIMELINE_EVENTS = [
 
 export function Timeline() {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const tweenRef = useRef<gsap.core.Tween | null>(null);
+    const inactivityTimeoutRef = useRef<NodeJS.Timeout>();
+    const isAnimatingRef = useRef(false);
+    const isDraggingRef = useRef(false);
+    const startXRef = useRef(0);
+    const scrollLeftRef = useRef(0);
 
     useEffect(() => {
         const container = scrollRef.current;
         if (!container) return;
 
-        let animationId: number;
-        let startTime: number;
-        const duration = 25000; // 25 seconds for full cycle
-        const totalWidth = container.scrollWidth - container.clientWidth;
+        const startAnimation = () => {
+            const totalWidth = container.scrollWidth - container.clientWidth;
+            const currentScroll = container.scrollLeft;
+            const remainingDistance = totalWidth - currentScroll;
 
-        const animate = (timestamp: number) => {
-            if (!startTime) startTime = timestamp;
-            const elapsed = timestamp - startTime;
-            const progress = (elapsed % duration) / duration;
+            // Calculate duration based on remaining distance (proportional speed)
+            const speed = totalWidth / 25; // pixels per second
+            const duration = remainingDistance / speed;
 
-            // Smooth easing function - linear for consistent speed
-            const easedProgress = progress;
+            if (remainingDistance <= 0) return; // Already at the end
 
-            container.scrollLeft = easedProgress * totalWidth;
-
-            animationId = requestAnimationFrame(animate);
+            isAnimatingRef.current = true;
+            tweenRef.current = gsap.to(container, {
+                scrollLeft: totalWidth,
+                duration: duration,
+                ease: "none",
+                onComplete: () => {
+                    isAnimatingRef.current = false;
+                }
+            });
         };
 
-        animationId = requestAnimationFrame(animate);
+        const stopAnimation = () => {
+            if (tweenRef.current) {
+                tweenRef.current.kill();
+                tweenRef.current = null;
+            }
+            isAnimatingRef.current = false;
+        };
+
+        const handleUserInteraction = () => {
+            if (!isAnimatingRef.current) return;
+
+            stopAnimation();
+
+            // Clear existing timeout
+            if (inactivityTimeoutRef.current) {
+                clearTimeout(inactivityTimeoutRef.current);
+            }
+
+            // Set new timeout to restart animation after 2 seconds
+            inactivityTimeoutRef.current = setTimeout(() => {
+                startAnimation();
+            }, 2000);
+        };
+
+        const handleMouseDown = (e: MouseEvent) => {
+            isDraggingRef.current = true;
+            startXRef.current = e.pageX - container.offsetLeft;
+            scrollLeftRef.current = container.scrollLeft;
+            container.style.cursor = 'grabbing';
+            container.style.userSelect = 'none';
+            handleUserInteraction();
+        };
+
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!isDraggingRef.current) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startXRef.current) * 2; // Scroll speed multiplier
+            container.scrollLeft = scrollLeftRef.current - walk;
+        };
+
+        const handleMouseUp = () => {
+            isDraggingRef.current = false;
+            container.style.cursor = 'grab';
+            container.style.userSelect = 'auto';
+        };
+
+        const handleMouseLeave = () => {
+            isDraggingRef.current = false;
+            container.style.cursor = 'grab';
+            container.style.userSelect = 'auto';
+        };
+
+        // Set initial cursor
+        container.style.cursor = 'grab';
+
+        // Listen to user interaction
+        container.addEventListener('mousedown', handleMouseDown);
+        container.addEventListener('mousemove', handleMouseMove);
+        container.addEventListener('mouseup', handleMouseUp);
+        container.addEventListener('mouseleave', handleMouseLeave);
+        container.addEventListener('touchstart', handleUserInteraction);
+        container.addEventListener('wheel', handleUserInteraction);
+
+        // Start initial animation
+        startAnimation();
 
         return () => {
-            if (animationId) {
-                cancelAnimationFrame(animationId);
+            stopAnimation();
+            if (inactivityTimeoutRef.current) {
+                clearTimeout(inactivityTimeoutRef.current);
             }
+            container.removeEventListener('mousedown', handleMouseDown);
+            container.removeEventListener('mousemove', handleMouseMove);
+            container.removeEventListener('mouseup', handleMouseUp);
+            container.removeEventListener('mouseleave', handleMouseLeave);
+            container.removeEventListener('touchstart', handleUserInteraction);
+            container.removeEventListener('wheel', handleUserInteraction);
         };
     }, []);
 
@@ -53,7 +136,11 @@ export function Timeline() {
         <div className="py-8">
             <div
                 ref={scrollRef}
-                className="overflow-x-auto pb-12 hide-scrollbar"
+                className="overflow-x-auto pb-12 custom-scrollbar"
+                style={{
+                    scrollbarWidth: 'thin',
+                    scrollbarColor: '#CE2E2F #E5E7EB',
+                }}
             >
                 <div className="flex gap-4 md:gap-8 min-w-max px-4">
                     {TIMELINE_EVENTS.map((event, index) => (

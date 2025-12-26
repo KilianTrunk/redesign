@@ -29,6 +29,17 @@ export function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isMobileMenuOpen]);
+
     useGSAP(() => {
         const ctx = gsap.context(() => {
             gsap.fromTo(headerRef.current,
@@ -63,7 +74,7 @@ export function Header() {
             )}
         >
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between min-h-[56px] md:min-h-[64px]">
-                <Link href="/" className="relative z-50 flex items-center gap-2">
+                <Link href="/" className="relative z-[70] flex items-center gap-2">
                     <Image
                         src="/assets/logo.png"
                         alt="Ortecha Logo"
@@ -75,7 +86,7 @@ export function Header() {
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden lg:flex items-center gap-12">
+                <nav className="hidden lg:flex items-center gap-6 xl:gap-12">
                     {NAV_ITEMS.map((item) => {
                         const isActive = pathname === item.href;
                         return (
@@ -83,16 +94,16 @@ export function Header() {
                                 key={item.label}
                                 href={item.href}
                                 className={cn(
-                                    "text-xl font-semibold transition-colors relative group",
+                                    "text-base xl:text-xl font-semibold transition-colors relative group",
                                     isActive ? "text-[var(--color-ortecha-main)]" : "text-[#343434] hover:text-[var(--color-ortecha-main)]"
                                 )}
                             >
                                 {item.label}
-                                <span 
+                                <span
                                     className={cn(
                                         "absolute left-1/2 -bottom-1 h-0.5 bg-[var(--color-ortecha-main)] transition-all duration-300",
                                         isActive ? "w-full left-0" : "w-0 group-hover:w-full group-hover:left-0"
-                                    )} 
+                                    )}
                                 />
                             </Link>
                         );
@@ -102,7 +113,7 @@ export function Header() {
                 <div className="hidden lg:flex items-center gap-4">
                     <Link
                         href="/contact-us"
-                        className="px-9 py-4 bg-[var(--color-ortecha-main)] text-white text-xl font-bold rounded-full hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg duration-200"
+                        className="px-6 xl:px-9 py-3 xl:py-4 bg-[var(--color-ortecha-main)] text-white text-base xl:text-xl font-bold rounded-full hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg duration-200"
                     >
                         Contact Us
                     </Link>
@@ -110,7 +121,7 @@ export function Header() {
 
                 {/* Mobile Toggle */}
                 <button
-                    className="lg:hidden relative z-50 p-2"
+                    className="lg:hidden relative z-[70] p-2"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     {isMobileMenuOpen ? (
@@ -122,28 +133,80 @@ export function Header() {
 
                 {/* Mobile Nav Overlay */}
                 <div
-                    className={cn(
-                        "fixed inset-0 bg-white z-40 lg:hidden flex flex-col items-center justify-center gap-12 transition-transform duration-500 ease-in-out",
-                        isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-                    )}
+                    className="lg:hidden"
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        width: '100%',
+                        height: '100vh',
+                        backgroundColor: '#FFFFFF',
+                        zIndex: 60,
+                        transition: 'transform 500ms ease-in-out',
+                        transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                        overflow: 'auto'
+                    }}
                 >
-                    {NAV_ITEMS.map((item) => (
-                        <Link
-                            key={item.label}
-                            href={item.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="text-4xl font-bold text-gray-900 hover:text-[var(--color-ortecha-main)]"
-                        >
-                            {item.label}
-                        </Link>
-                    ))}
-                    <Link
-                        href="/contact-us"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="px-10 py-4 bg-[var(--color-ortecha-main)] text-white text-xl font-semibold rounded-full mt-6"
-                    >
-                        Contact Us
-                    </Link>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: '100%',
+                        width: '100%',
+                        backgroundColor: '#FFFFFF',
+                        minHeight: '100vh'
+                    }}>
+                        {/* Navigation Links */}
+                        <nav style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '2rem',
+                            paddingTop: '8rem',
+                            paddingLeft: '2rem',
+                            paddingRight: '2rem',
+                            backgroundColor: '#FFFFFF'
+                        }}>
+                            {NAV_ITEMS.map((item, index) => {
+                                const isActive = pathname === item.href;
+                                return (
+                                    <Link
+                                        key={item.label}
+                                        href={item.href}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className={cn(
+                                            "text-3xl md:text-4xl font-bold transition-all duration-300 transform hover:translate-x-2",
+                                            isActive ? "text-[var(--color-ortecha-main)]" : "text-gray-900 hover:text-[var(--color-ortecha-main)]"
+                                        )}
+                                        style={{
+                                            transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : '0ms'
+                                        }}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                );
+                            })}
+                        </nav>
+
+                        {/* CTA Button */}
+                        <div style={{
+                            marginTop: 'auto',
+                            paddingTop: '3rem',
+                            paddingBottom: '4rem',
+                            paddingLeft: '2rem',
+                            paddingRight: '2rem',
+                            backgroundColor: '#FFFFFF'
+                        }}>
+                            <Link
+                                href="/contact-us"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="block w-full text-center px-10 py-5 bg-[var(--color-ortecha-main)] text-white text-xl font-bold rounded-full hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-lg hover:shadow-xl"
+                            >
+                                Contact Us
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>

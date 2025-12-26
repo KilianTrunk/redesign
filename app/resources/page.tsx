@@ -1,11 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Section } from "@/components/ui/section";
 import { CTA } from "@/components/landing/cta";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const CATEGORIES = ["All", "News", "Articles", "Events & Webinars", "Case Studies", "Papers", "Videos"];
 
@@ -86,16 +91,67 @@ const RESOURCES = [
 
 export default function ResourcesPage() {
     const [activeCategory, setActiveCategory] = useState("All");
+    const heroRef = useRef<HTMLDivElement>(null);
+    const filterRef = useRef<HTMLDivElement>(null);
+    const gridRef = useRef<HTMLDivElement>(null);
 
     const filteredResources = activeCategory === "All"
         ? RESOURCES
         : RESOURCES.filter(r => r.category === activeCategory);
 
+    useGSAP(() => {
+        // Hero Animation
+        const heroChildren = gsap.utils.toArray(heroRef.current!.children);
+        gsap.fromTo(
+            heroChildren,
+            { opacity: 0, y: 50 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out",
+                delay: 0.3,
+            }
+        );
+
+        // Filter Animation
+        gsap.fromTo(
+            filterRef.current,
+            { opacity: 0, y: -20 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: 0.6,
+            }
+        );
+
+        // Grid Animation
+        const gridItems = gsap.utils.toArray(gridRef.current!.children);
+        gsap.fromTo(
+            gridItems,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                scrollTrigger: {
+                    trigger: gridRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+    }, [filteredResources]);
+
     return (
         <div className="pt-24">
             {/* Hero */}
             <Section className="bg-gray-50 pb-16">
-                <div className="max-w-4xl text-center mx-auto">
+                <div ref={heroRef} className="max-w-4xl text-center mx-auto">
                     <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight">
                         Resources & <span className="text-[var(--color-ortecha-main)]">Insights</span>
                     </h1>
@@ -107,8 +163,8 @@ export default function ResourcesPage() {
 
             {/* Filter */}
             <div className="sticky top-24 z-30 bg-white/90 backdrop-blur-md border-b border-gray-100 py-6">
-                <div className="container mx-auto px-4 md:px-6 overflow-x-auto">
-                    <div className="flex items-center justify-center gap-2 min-w-max">
+                <div className="container mx-auto px-4 md:px-6">
+                    <div ref={filterRef} className="grid grid-cols-2 md:flex md:items-center md:justify-center gap-2">
                         {CATEGORIES.map((cat) => (
                             <button
                                 key={cat}
@@ -129,7 +185,7 @@ export default function ResourcesPage() {
 
             {/* Grid */}
             <Section className="bg-white min-h-[50vh]">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredResources.map((resource, index) => (
                         <Link
                             key={index}

@@ -114,26 +114,52 @@ const TEAM = [
 
 export function TeamGrid() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {TEAM.map((member, index) => (
-                <div key={index} className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-[var(--color-ortecha-main)]/20 transition-all duration-300">
-                    <div className="mb-6 flex items-start justify-between">
-                        <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center text-xl font-bold text-gray-400 group-hover:border-2 group-hover:border-[var(--color-ortecha-main)] transition-all">
-                            {member.image ? (
-                                <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
-                            ) : (
-                                <span className="group-hover:text-[var(--color-ortecha-main)]">{member.name.charAt(0)}</span>
-                            )}
-                        </div>
-                        {member.linkedin && (
-                            <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#0077b5] transition-colors">
-                                <Linkedin className="w-6 h-6" />
+                <div key={index} className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-[var(--color-ortecha-main)]/30">
+                    {/* Image Section */}
+                    <div className="relative w-full aspect-square bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden p-4">
+                        {member.image ? (
+                            <img
+                                src={member.image}
+                                alt={member.name}
+                                className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                            />
+                        ) : (
+                            <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-gray-300">
+                                {member.name.charAt(0)}
+                            </div>
+                        )}
+
+                        {/* Gradient Overlay on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ortecha-main)]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                        {/* LinkedIn Icon */}
+                        {member.linkedin && member.linkedin !== "#" && (
+                            <a
+                                href={member.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-600 hover:text-[#0077b5] hover:bg-white transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 shadow-lg"
+                            >
+                                <Linkedin className="w-4 h-4" />
                             </a>
                         )}
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
-                    <p className="text-[var(--color-ortecha-main)] font-medium text-sm mb-4">{member.role}</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">{member.description}</p>
+
+                    {/* Content Section */}
+                    <div className="p-5">
+                        <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-[var(--color-ortecha-main)] transition-colors duration-300">
+                            {member.name}
+                        </h3>
+                        <p className="text-[var(--color-ortecha-main)] font-semibold text-xs mb-3 uppercase tracking-wide">
+                            {member.role}
+                        </p>
+                        <div className="h-px bg-gradient-to-r from-[var(--color-ortecha-main)] via-[var(--color-ortecha-main)]/50 to-transparent mb-3" />
+                        <p className="text-gray-600 text-sm leading-relaxed hidden md:block">
+                            {member.description}
+                        </p>
+                    </div>
                 </div>
             ))}
         </div>
