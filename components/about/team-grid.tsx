@@ -1,10 +1,17 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { Linkedin } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ChevronRight, Linkedin, X } from "lucide-react";
 
-const TEAM = [
+type TeamMember = {
+    name: string;
+    role: string;
+    image?: string;
+    description: string;
+    linkedin?: string;
+};
+
+const TEAM: TeamMember[] = [
     {
         name: "Pete Youngs",
         role: "Managing Partner & CEO",
@@ -113,13 +120,41 @@ const TEAM = [
 ];
 
 export function TeamGrid() {
+    const [activeMember, setActiveMember] = useState<TeamMember | null>(null);
+
+    const hasLinkedIn = useMemo(() => {
+        return (m: TeamMember | null) => !!m?.linkedin && m.linkedin !== "#";
+    }, []);
+
+    useEffect(() => {
+        if (!activeMember) return;
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setActiveMember(null);
+        };
+        window.addEventListener("keydown", onKeyDown);
+        // Lock scroll behind modal (works with Lenis + mobile Safari better than body-only)
+        const prevBodyOverflow = document.body.style.overflow;
+        const prevHtmlOverflow = document.documentElement.style.overflow;
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+        return () => {
+            window.removeEventListener("keydown", onKeyDown);
+            document.body.style.overflow = prevBodyOverflow;
+            document.documentElement.style.overflow = prevHtmlOverflow;
+        };
+    }, [activeMember]);
+
     return (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 auto-rows-fr">
-            {TEAM.map((member, index) => (
-                <div
-                    key={index}
-                    className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-[var(--color-ortecha-main)]/30 flex flex-col h-full"
-                >
+        <>
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 auto-rows-fr">
+                {TEAM.map((member, index) => (
+                    <button
+                        key={index}
+                        type="button"
+                        onClick={() => setActiveMember(member)}
+                        className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-[var(--color-ortecha-main)]/30 flex flex-col h-full text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ortecha-main)]/40 active:scale-[0.99]"
+                        aria-label={`Open details for ${member.name}`}
+                    >
                     {/* Image Section */}
                     <div className="relative w-full aspect-square bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden p-4">
                         {member.image ? (
@@ -144,6 +179,8 @@ export function TeamGrid() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-600 hover:text-[#0077b5] hover:bg-white transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 shadow-lg"
+                                onClick={(e) => e.stopPropagation()}
+                                aria-label={`Open ${member.name}'s LinkedIn`}
                             >
                                 <Linkedin className="w-4 h-4" />
                             </a>
@@ -158,14 +195,91 @@ export function TeamGrid() {
                         <p className="text-[var(--color-ortecha-main)] font-semibold text-[10px] sm:text-xs mt-1 uppercase tracking-wide leading-snug line-clamp-2">
                             {member.role}
                         </p>
+
+                        {/* Clear affordance on mobile (icon-only was too subtle) */}
+                        <div className="md:hidden mt-3">
+                            <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-semibold text-gray-800">
+                                View bio
+                                <ChevronRight className="w-4 h-4" />
+                            </span>
+                        </div>
+
                         {/* Divider adds a lot of perceived empty space on mobile */}
                         <div className="hidden md:block h-px bg-gradient-to-r from-[var(--color-ortecha-main)] via-[var(--color-ortecha-main)]/50 to-transparent my-3" />
                         <p className="text-gray-600 text-sm leading-relaxed hidden md:block">
                             {member.description}
                         </p>
                     </div>
+                    </button>
+                ))}
+            </div>
+
+            {/* Details modal */}
+            {activeMember && (
+                <div
+                    className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={`${activeMember.name} details`}
+                    onMouseDown={(e) => {
+                        if (e.currentTarget === e.target) setActiveMember(null);
+                    }}
+                    // Prevent Lenis from scrolling the page behind
+                    data-lenis-prevent
+                >
+                    <div
+                        className="w-full max-w-lg max-h-[85vh] overflow-auto rounded-2xl bg-white shadow-2xl border border-black/5"
+                        data-lenis-prevent
+                    >
+                        <div className="p-4 sm:p-6 flex items-start justify-between gap-4">
+                            <div className="min-w-0">
+                                <h3 className="text-2xl font-bold text-gray-900">{activeMember.name}</h3>
+                                <p className="text-[var(--color-ortecha-main)] font-semibold text-sm uppercase tracking-wide mt-1">
+                                    {activeMember.role}
+                                </p>
+                            </div>
+                            <div className="shrink-0 flex items-center gap-2">
+                                {hasLinkedIn(activeMember) && (
+                                    <a
+                                        href={activeMember.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-900 font-semibold text-sm"
+                                        aria-label={`Open ${activeMember.name}'s LinkedIn`}
+                                    >
+                                        <Linkedin className="w-4 h-4" />
+                                        LinkedIn
+                                    </a>
+                                )}
+                                <button
+                                    type="button"
+                                    onClick={() => setActiveMember(null)}
+                                    className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center cursor-pointer"
+                                    aria-label="Close"
+                                >
+                                    <X className="w-5 h-5 text-gray-800" />
+                                </button>
+                            </div>
+                        </div>
+
+                        {activeMember.image && (
+                            <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+                                <div className="relative w-full h-[200px] sm:h-[240px] rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200">
+                                    <img
+                                        src={activeMember.image}
+                                        alt={activeMember.name}
+                                        className="w-full h-full object-contain object-center p-3"
+                                    />
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="px-4 sm:px-6 pb-5 sm:pb-6">
+                            <p className="text-gray-700 leading-relaxed">{activeMember.description}</p>
+                        </div>
+                    </div>
                 </div>
-            ))}
-        </div>
+            )}
+        </>
     );
 }
