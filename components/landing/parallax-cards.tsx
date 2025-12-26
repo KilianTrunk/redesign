@@ -184,10 +184,10 @@ export function ParallaxCards() {
                                     {/* Content */}
                                     <div className="card-content absolute bottom-0 left-0 w-full p-8 text-white transform transition-transform">
                                         <h3 className="text-2xl font-bold mb-3">{card.title}</h3>
-                                        <p className="text-sm text-gray-200 leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out transform translate-y-4 group-hover:translate-y-0">
+                                        <p className="text-sm text-gray-200 leading-relaxed transition-all duration-300 ease-in-out">
                                             {card.subtitle}
                                         </p>
-                                        <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-ortecha-main)] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out delay-100">
+                                        <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-ortecha-main)] transition-all duration-300 ease-in-out">
                                             Explore <span className="text-lg">→</span>
                                         </div>
                                     </div>

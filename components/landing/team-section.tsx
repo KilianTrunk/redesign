@@ -91,8 +91,8 @@ export function TeamSection() {
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
                     {TEAM.map((member, index) => (
-                        <div key={index} className="team-card lg:flex-shrink-0 lg:w-auto lg:flex-1 lg:snap-center">
-                            <div className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow p-3 md:p-5 lg:p-6">
+                        <div key={index} className="team-card lg:flex-shrink-0 lg:w-auto lg:flex-1 lg:snap-center h-full">
+                            <div className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow p-3 md:p-5 lg:p-6 h-full flex flex-col">
                                 <div className="aspect-square relative">
                                     <img
                                         src={member.image}
@@ -100,7 +100,7 @@ export function TeamSection() {
                                         className="w-full h-full object-cover rounded-lg lg:rounded-xl transition-transform duration-500 hover:scale-105 hover:z-10 relative"
                                     />
                                 </div>
-                                <div className="pt-3 md:pt-4 pb-1 md:pb-2 px-1 md:px-2">
+                                <div className="pt-3 md:pt-4 pb-1 md:pb-2 px-1 md:px-2 flex-grow flex flex-col justify-start">
                                     <h4 className="font-bold text-sm md:text-base text-gray-900">{member.name}</h4>
                                     <p className="text-[10px] md:text-xs text-[var(--color-ortecha-main)] font-medium mt-1">{member.role}</p>
                                 </div>

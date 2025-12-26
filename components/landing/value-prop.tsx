@@ -65,8 +65,8 @@ export function ValueProp() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div ref={textRef} className="px-4 space-y-8 order-2 lg:order-1">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight leading-tight">
-                        Real people making <span className="text-[var(--color-ortecha-main)]">data & AI</span><br />
-                        work for real people
+                        Real people making<br />
+                        <span className="text-[var(--color-ortecha-main)]">data&nbsp;&amp;&nbsp;AI</span> work for real people
                     </h1>
 
                     <div className="space-y-6 text-xl text-gray-600 leading-relaxed">

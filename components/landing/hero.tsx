@@ -76,7 +76,7 @@ export function Hero() {
             {/* Subtle red tint overlay for atmosphere */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-[var(--color-ortecha-main)]/5 via-transparent to-transparent opacity-50"></div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div className="order-2 lg:order-1 space-y-8">
+                <div className="order-1 lg:order-1 space-y-8">
                     <h2 
                         ref={subtitleRef}
                         className="text-2xl md:text-3xl font-medium text-gray-500 uppercase tracking-widest"
@@ -113,7 +113,7 @@ export function Hero() {
                     </div>
                 </div>
 
-                <div className="order-1 lg:order-2 flex justify-center relative h-[780px] items-center">
+                <div className="order-1 lg:order-2 flex justify-center relative h-[780px] items-center hidden lg:flex">
                     <div ref={imageRef} className="relative w-full h-full flex items-center justify-center overflow-hidden">
                         <ThreeMarketChart className="z-10" />
                     </div>

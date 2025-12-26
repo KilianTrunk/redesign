@@ -134,13 +134,26 @@ export function JourneyInfographic() {
         <div ref={containerRef} className="relative w-full h-full min-h-[500px] md:min-h-[600px] flex items-center justify-center p-12 sm:p-16 md:p-20">
             {/* Floating Background Particles */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(12)].map((_, i) => (
+                {[
+                    { left: 6.4, top: 60.9 },
+                    { left: 78.8, top: 32.2 },
+                    { left: 24.8, top: 65.6 },
+                    { left: 76.2, top: 28.1 },
+                    { left: 53.4, top: 66.7 },
+                    { left: 33.5, top: 75.1 },
+                    { left: 16.9, top: 29.3 },
+                    { left: 46.2, top: 49.6 },
+                    { left: 94.6, top: 84.1 },
+                    { left: 89.3, top: 23.2 },
+                    { left: 81.2, top: 95.6 },
+                    { left: 49.3, top: 82.1 },
+                ].map((position, i) => (
                     <div
                         key={i}
                         className="particle absolute w-1.5 md:w-2 h-1.5 md:h-2 bg-red-500/20 rounded-full blur-sm"
                         style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
+                            left: `${position.left}%`,
+                            top: `${position.top}%`,
                         }}
                     />
                 ))}
