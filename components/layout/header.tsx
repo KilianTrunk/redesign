@@ -31,14 +31,20 @@ export function Header() {
 
     useGSAP(() => {
         const ctx = gsap.context(() => {
-            gsap.from(headerRef.current, {
-                y: -100,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-                delay: 0.2,
-                clearProps: "all"
-            });
+            gsap.fromTo(headerRef.current,
+                {
+                    y: -100,
+                    opacity: 0
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.2,
+                    clearProps: "all"
+                }
+            );
         });
         return () => ctx.revert();
     }, []);
@@ -48,6 +54,7 @@ export function Header() {
     return (
         <header
             ref={headerRef}
+            style={{ transform: 'translateY(-100px)', opacity: 0 }}
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4",
                 isScrolled
