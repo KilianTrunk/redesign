@@ -52,8 +52,7 @@ export function Footer() {
                             <li><Link href="/about-us" className="text-gray-600 hover:text-black transition-colors">About Us</Link></li>
                             <li><Link href="/solutions" className="text-gray-600 hover:text-black transition-colors">Solutions</Link></li>
                             <li><Link href="/resources" className="text-gray-600 hover:text-black transition-colors">Resources</Link></li>
-                            <li><Link href="/careers" className="text-gray-600 hover:text-black transition-colors">Careers</Link></li>
-                            <li><Link href="/contact" className="text-gray-600 hover:text-black transition-colors">Contact</Link></li>
+                            <li><Link href="/contact-us" className="text-gray-600 hover:text-black transition-colors">Contact</Link></li>
                         </ul>
                     </div>
 
@@ -61,10 +60,10 @@ export function Footer() {
                     <div>
                         <h4 className="text-lg font-bold text-gray-900 mb-6">Solutions</h4>
                         <ul className="space-y-3">
-                            <li><Link href="#" className="text-gray-600 hover:text-black transition-colors">Data Governance</Link></li>
-                            <li><Link href="#" className="text-gray-600 hover:text-black transition-colors">Data Quality</Link></li>
-                            <li><Link href="#" className="text-gray-600 hover:text-black transition-colors">Data Strategy</Link></li>
-                            <li><Link href="#" className="text-gray-600 hover:text-black transition-colors">Master Data Management</Link></li>
+                            <li><Link href="/solutions/data-ai-governance" className="text-gray-600 hover:text-black transition-colors">Data Governance</Link></li>
+                            <li><Link href="/solutions/data-ai-strategy" className="text-gray-600 hover:text-black transition-colors">Data Strategy</Link></li>
+                            <li><Link href="/solutions/enterprise-architecture" className="text-gray-600 hover:text-black transition-colors">Enterprise Architecture</Link></li>
+                            <li><Link href="/solutions/data-literacy-culture" className="text-gray-600 hover:text-black transition-colors">Data Literacy & Culture</Link></li>
                         </ul>
                     </div>
 

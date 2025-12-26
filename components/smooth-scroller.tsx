@@ -83,11 +83,12 @@ export function SmoothScroller({ children }: { children: ReactNode }) {
         <ReactLenis
             root
             options={{
-                lerp: 0.08,
-                duration: 1.2,
+                lerp: 0.05, // Less aggressive smoothing
+                duration: 0.8, // Shorter duration
                 smoothWheel: true,
-                touchMultiplier: 2,
-                infinite: false
+                touchMultiplier: 1.5, // Reduced touch multiplier
+                infinite: false,
+                normalizeWheel: true, // Better wheel normalization
             }}
         >
             {children}

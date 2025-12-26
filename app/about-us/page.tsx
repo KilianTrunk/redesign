@@ -263,7 +263,7 @@ export default function AboutPage() {
                 <LatestNews />
             </Section>
 
-            <CTA animate={false} />
+            <CTA />
         </div>
     );
 }

@@ -114,7 +114,7 @@ const TEAM = [
 
 export function TeamGrid() {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
             {TEAM.map((member, index) => (
                 <div key={index} className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-[var(--color-ortecha-main)]/30">
                     {/* Image Section */}

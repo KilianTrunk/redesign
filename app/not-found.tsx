@@ -48,39 +48,6 @@ export default function NotFound() {
                             </Link>
                         </div>
                     </div>
-
-                    {/* Additional Company Info */}
-                    <div className="mt-12 bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-4">About Ortecha</h2>
-                        <p className="text-gray-600 mb-6 leading-relaxed">
-                            We're data management experts helping organizations transform their data into a strategic asset.
-                            From governance and quality to advanced analytics and AI, we make data work harder for your business.
-                        </p>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                            <div className="text-center">
-                                <Trophy className="w-12 h-12 text-[var(--color-ortecha-main)] mx-auto mb-3" />
-                                <div className="text-gray-600 font-medium">Industry Leaders</div>
-                            </div>
-                            <div className="text-center">
-                                <Shield className="w-12 h-12 text-[var(--color-ortecha-main)] mx-auto mb-3" />
-                                <div className="text-gray-600 font-medium">Trusted by Enterprises</div>
-                            </div>
-                            <div className="text-center">
-                                <Rocket className="w-12 h-12 text-[var(--color-ortecha-main)] mx-auto mb-3" />
-                                <div className="text-gray-600 font-medium">Innovation Focused</div>
-                            </div>
-                        </div>
-
-                        <div className="mt-8 pt-6 border-t border-gray-100">
-                            <p className="text-gray-600 text-center">
-                                Ready to unlock your data's potential?{" "}
-                                <Link href="/contact-us" className="text-[var(--color-ortecha-main)] hover:underline font-semibold">
-                                    Let's talk about your project
-                                </Link>
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </Section>
         </div>
