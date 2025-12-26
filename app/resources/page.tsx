@@ -21,7 +21,7 @@ const RESOURCES = [
         description: "Ortecha and OBG announce strategic partnership to deliver data excellence.",
         date: "Oct 2025",
         image: "https://ortecha.com/wp-content/uploads/2025/10/OBG-Press-Release.png",
-        href: "#",
+        href: "/news/ortecha-obg-press-release",
     },
     {
         category: "News",
@@ -29,7 +29,7 @@ const RESOURCES = [
         description: "Ortecha continues its expansion with key leadership appointments in the UK as growth momentum continues.",
         date: "Dec 2025",
         image: "/images/news/london-skyline.png",
-        href: "#",
+        href: "/news/ortecha-appoints-two-uk-partners",
     },
     {
         category: "News",
@@ -37,7 +37,7 @@ const RESOURCES = [
         description: "Stephen brings deep expertise to lead our AI strategy practice as Partner and Head of AI Strategy.",
         date: "Nov 2025",
         image: "/images/news/obg-press-release.png",
-        href: "#",
+        href: "/news/ortecha-welcomes-stephen-gatchell",
     },
     {
         category: "Events & Webinars",
@@ -45,7 +45,7 @@ const RESOURCES = [
         description: "Join us for this on-demand webinar where we explore how to master data lineage.",
         date: "On Demand",
         image: "https://ortecha.com/wp-content/uploads/2023/11/The-Data-Leadership-Series-A-festive-fireside-splat-tn.png",
-        href: "#",
+        href: "/webinars/mastering-data-lineage",
     },
     {
         category: "Articles",
@@ -53,7 +53,7 @@ const RESOURCES = [
         description: "The EDM Association recently released their DCAM v3 framework. This blogs outlines why it should be on the radar of every data leader today.",
         date: "Dec 2024",
         image: "https://ortecha.com/wp-content/uploads/2025/07/DCAM-v3-Blog-Header-1024x576.png",
-        href: "#",
+        href: "/blog/dcam-v3-new-gold-standard",
     },
     {
         category: "Articles",
@@ -61,7 +61,7 @@ const RESOURCES = [
         description: "This blog explores how data teams can move beyond numbers to create narratives that connect, inspire action, and make insights unforgettable.",
         date: "Nov 2024",
         image: "https://ortecha.com/wp-content/uploads/2025/06/Storytelling-blog-1024x576.png",
-        href: "#",
+        href: "/blog/data-storytelling-pixar",
     },
     {
         category: "Case Studies",
@@ -69,7 +69,7 @@ const RESOURCES = [
         description: "How a global bank transformed its data management capability.",
         date: "2024",
         image: "https://ortecha.com/wp-content/uploads/2024/11/monty-allen-7_gpgj69CrY-unsplash-1024x683.jpg",
-        href: "#",
+        href: "/case-studies/standard-bank",
     },
     {
         category: "Papers",
@@ -77,15 +77,15 @@ const RESOURCES = [
         description: "Knowledge Architecture transforms information into intelligence – unlocking explainable AI, unified insights and strategic advantage.",
         date: "Whitepaper",
         image: "https://ortecha.com/wp-content/uploads/2025/08/Data-Arch-to-Knowledge-Arch-Blog-Header-1024x576.png",
-        href: "#",
+        href: "/whitepapers/knowledge-architecture",
     },
     {
         category: "Videos",
         title: "Have you got your data under control?",
-        description: "Claudia’s got her data under control, and she seems pretty happy about it! How do you feel about yours?",
+        description: "Claudia's got her data under control, and she seems pretty happy about it! How do you feel about yours?",
         date: "Video",
         image: "https://ortecha.com/wp-content/uploads/2021/09/Claudia-4-1024x574.png",
-        href: "#",
+        href: "/videos/data-control",
     },
 ];
 
