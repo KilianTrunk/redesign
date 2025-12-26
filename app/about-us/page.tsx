@@ -52,60 +52,60 @@ export default function AboutPage() {
                     </div>
 
                     <div className="space-y-12" id="values">
-                        <div className="bg-[var(--color-ortecha-main)] rounded-3xl p-10 text-white flex flex-col justify-center">
-                            <h3 className="text-2xl font-bold mb-4">What drives us?</h3>
-                            <p className="mb-8 font-medium italic opacity-90 text-lg">
-                                Our values aren’t corporate wallpaper. They’re how we actually work – with each other, with clients, with our communities.
+                        <div className="bg-[var(--color-ortecha-main)] rounded-3xl p-6 md:p-10 text-white flex flex-col justify-center">
+                            <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">What drives us?</h3>
+                            <p className="mb-6 md:mb-8 font-medium italic opacity-90 text-base md:text-lg">
+                                Our values aren't corporate wallpaper. They're how we actually work – with each other, with clients, with our communities.
                             </p>
-                            <ul className="space-y-6">
-                                <li className="flex gap-4">
-                                    <div className="font-bold shrink-0">01</div>
+                            <ul className="space-y-4 md:space-y-6">
+                                <li className="flex gap-3 md:gap-4">
+                                    <div className="font-bold shrink-0 text-sm md:text-base">01</div>
                                     <div>
-                                        <strong className="block text-lg">People first</strong>
-                                        <span className="opacity-90">Strong relationships and real partnerships are everything.</span>
+                                        <strong className="block text-base md:text-lg">People first</strong>
+                                        <span className="opacity-90 text-sm md:text-base">Strong relationships and real partnerships are everything.</span>
                                     </div>
                                 </li>
-                                <li className="flex gap-4">
-                                    <div className="font-bold shrink-0">02</div>
+                                <li className="flex gap-3 md:gap-4">
+                                    <div className="font-bold shrink-0 text-sm md:text-base">02</div>
                                     <div>
-                                        <strong className="block text-lg">We own every challenge</strong>
-                                        <span className="opacity-90">Your problems become our problems. We're in this together.</span>
+                                        <strong className="block text-base md:text-lg">We own every challenge</strong>
+                                        <span className="opacity-90 text-sm md:text-base">Your problems become our problems. We're in this together.</span>
                                     </div>
                                 </li>
-                                <li className="flex gap-4">
-                                    <div className="font-bold shrink-0">03</div>
+                                <li className="flex gap-3 md:gap-4">
+                                    <div className="font-bold shrink-0 text-sm md:text-base">03</div>
                                     <div>
-                                        <strong className="block text-lg">Practitioners, not theorists</strong>
-                                        <span className="opacity-90">We've done this before, and we know what it takes.</span>
+                                        <strong className="block text-base md:text-lg">Practitioners, not theorists</strong>
+                                        <span className="opacity-90 text-sm md:text-base">We've done this before, and we know what it takes.</span>
                                     </div>
                                 </li>
-                                <li className="flex gap-4">
-                                    <div className="font-bold shrink-0">04</div>
+                                <li className="flex gap-3 md:gap-4">
+                                    <div className="font-bold shrink-0 text-sm md:text-base">04</div>
                                     <div>
-                                        <strong className="block text-lg">Eyes on the horizon</strong>
-                                        <span className="opacity-90">We keep learning, adapting, and sharing what's coming so you're ready.</span>
+                                        <strong className="block text-base md:text-lg">Eyes on the horizon</strong>
+                                        <span className="opacity-90 text-sm md:text-base">We keep learning, adapting, and sharing what's coming so you're ready.</span>
                                     </div>
                                 </li>
-                                <li className="flex gap-4">
-                                    <div className="font-bold shrink-0">05</div>
+                                <li className="flex gap-3 md:gap-4">
+                                    <div className="font-bold shrink-0 text-sm md:text-base">05</div>
                                     <div>
-                                        <strong className="block text-lg">Integrity in everything</strong>
-                                        <span className="opacity-90">We do what's right, not what's easy.</span>
+                                        <strong className="block text-base md:text-lg">Integrity in everything</strong>
+                                        <span className="opacity-90 text-sm md:text-base">We do what's right, not what's easy.</span>
                                     </div>
                                 </li>
                             </ul>
                         </div>
 
                         {/* Industry Recognition */}
-                        <div className="bg-gray-50 rounded-3xl p-10 border border-gray-200">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4">Industry recognition</h3>
-                            <p className="text-gray-600 mb-4 text-lg">
-                                We don’t just follow best practices – we help create them.
+                        <div className="bg-gray-50 rounded-3xl p-6 md:p-10 border border-gray-200">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Industry recognition</h3>
+                            <p className="text-gray-600 mb-3 md:mb-4 text-base md:text-lg">
+                                We don't just follow best practices – we help create them.
                             </p>
-                            <p className="text-gray-600 leading-relaxed mb-6">
-                                We’re active members of the EDM Association, the global body for data management. And not just members – we’re involved in shaping standards and promoting excellence. That’s why clients trust us to help navigate complex challenges and prepare for what’s ahead.
+                            <p className="text-gray-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
+                                We're active members of the EDM Association, the global body for data management. And not just members – we're involved in shaping standards and promoting excellence. That's why clients trust us to help navigate complex challenges and prepare for what's ahead.
                             </p>
-                            <a href="#" className="text-[var(--color-ortecha-main)] font-semibold hover:underline inline-flex items-center gap-2">
+                            <a href="#" className="text-[var(--color-ortecha-main)] font-semibold hover:underline inline-flex items-center gap-2 text-sm md:text-base">
                                 More about EDM Association <span aria-hidden="true">&rarr;</span>
                             </a>
                         </div>

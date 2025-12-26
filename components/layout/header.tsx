@@ -74,7 +74,7 @@ export function Header() {
             )}
         >
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between min-h-[56px] md:min-h-[64px]">
-                <Link href="/" className="relative z-50 flex items-center gap-2">
+                <Link href="/" className="relative z-[70] flex items-center gap-2">
                     <Image
                         src="/assets/logo.png"
                         alt="Ortecha Logo"
@@ -121,7 +121,7 @@ export function Header() {
 
                 {/* Mobile Toggle */}
                 <button
-                    className="lg:hidden relative z-50 p-2"
+                    className="lg:hidden relative z-[70] p-2"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     {isMobileMenuOpen ? (
@@ -133,14 +133,41 @@ export function Header() {
 
                 {/* Mobile Nav Overlay */}
                 <div
-                    className={cn(
-                        "fixed inset-0 z-40 lg:hidden transition-transform duration-500 ease-in-out bg-white",
-                        isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-                    )}
+                    className="lg:hidden"
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        width: '100%',
+                        height: '100vh',
+                        backgroundColor: '#FFFFFF',
+                        zIndex: 60,
+                        transition: 'transform 500ms ease-in-out',
+                        transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                        overflow: 'auto'
+                    }}
                 >
-                    <div className="flex flex-col h-full px-8 pt-32 pb-12">
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: '100%',
+                        width: '100%',
+                        backgroundColor: '#FFFFFF',
+                        minHeight: '100vh'
+                    }}>
                         {/* Navigation Links */}
-                        <nav className="flex flex-col gap-8">
+                        <nav style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '2rem',
+                            paddingTop: '8rem',
+                            paddingLeft: '2rem',
+                            paddingRight: '2rem',
+                            backgroundColor: '#FFFFFF'
+                        }}>
                             {NAV_ITEMS.map((item, index) => {
                                 const isActive = pathname === item.href;
                                 return (
@@ -163,7 +190,14 @@ export function Header() {
                         </nav>
 
                         {/* CTA Button */}
-                        <div className="mt-auto">
+                        <div style={{
+                            marginTop: 'auto',
+                            paddingTop: '3rem',
+                            paddingBottom: '4rem',
+                            paddingLeft: '2rem',
+                            paddingRight: '2rem',
+                            backgroundColor: '#FFFFFF'
+                        }}>
                             <Link
                                 href="/contact-us"
                                 onClick={() => setIsMobileMenuOpen(false)}
