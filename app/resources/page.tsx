@@ -12,7 +12,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CATEGORIES = ["All", "News", "Articles", "Events & Webinars", "Case Studies", "Papers", "Videos"];
+const CATEGORIES = ["All", "News", "Articles", "Events", "Case Studies", "Papers", "Videos"];
 
 const RESOURCES = [
     {
@@ -40,7 +40,7 @@ const RESOURCES = [
         href: "/news/ortecha-welcomes-stephen-gatchell",
     },
     {
-        category: "Events & Webinars",
+        category: "Events",
         title: "Mastering Data Lineage for Risk, Compliance and AI Governance",
         description: "Join us for this on-demand webinar where we explore how to master data lineage.",
         date: "On Demand",
@@ -162,15 +162,15 @@ export default function ResourcesPage() {
             </Section>
 
             {/* Filter */}
-            <div className="sticky top-24 z-30 bg-white/90 backdrop-blur-md border-b border-gray-100 py-6">
+            <div className="sticky top-24 z-30 bg-white/90 backdrop-blur-md border-b border-gray-100 py-3 md:py-6">
                 <div className="container mx-auto px-4 md:px-6">
-                    <div ref={filterRef} className="grid grid-cols-2 md:flex md:items-center md:justify-center gap-2">
+                    <div ref={filterRef} className="grid grid-cols-4 md:flex md:items-center md:justify-center gap-1.5 md:gap-2">
                         {CATEGORIES.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
                                 className={cn(
-                                    "px-6 py-2 rounded-full text-sm font-bold transition-all",
+                                    "px-2 py-1.5 md:px-6 md:py-2 rounded-full text-[11px] md:text-sm font-bold transition-all",
                                     activeCategory === cat
                                         ? "bg-[var(--color-ortecha-main)] text-white shadow-md"
                                         : "bg-gray-100 text-gray-600 hover:bg-gray-200"
