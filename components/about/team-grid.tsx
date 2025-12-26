@@ -199,7 +199,7 @@ export function TeamGrid() {
                         {/* Clear affordance on mobile (icon-only was too subtle) */}
                         <div className="md:hidden mt-3">
                             <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-semibold text-gray-800">
-                                View bio
+                                Read more
                                 <ChevronRight className="w-4 h-4" />
                             </span>
                         </div>
