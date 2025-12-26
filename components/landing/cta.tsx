@@ -14,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function CTA() {
     const containerRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const visualRef = useRef<HTMLDivElement>(null);
 
     useGSAP(
         () => {
@@ -25,6 +26,7 @@ export function CTA() {
                     opacity: 1,
                     duration: 1,
                     ease: "power3.out",
+                    immediateRender: false,
                     scrollTrigger: {
                         trigger: containerRef.current,
                         start: "top 75%",
@@ -41,7 +43,7 @@ export function CTA() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,_rgba(206,46,47,0.1)_0%,_transparent_50%)] pointer-events-none"></div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <div className="flex justify-center items-center min-h-[280px] sm:min-h-[400px] lg:min-h-[500px] order-2 lg:order-1 px-4 sm:px-8 md:px-12 lg:px-20 py-8 sm:py-16 lg:py-24">
+                <div ref={visualRef} className="flex justify-center items-center min-h-[280px] sm:min-h-[400px] lg:min-h-[500px] order-2 lg:order-1 px-4 sm:px-8 md:px-12 lg:px-20 py-8 sm:py-16 lg:py-24 opacity-100">
                     <div className="w-full h-[280px] sm:h-[400px] lg:h-[400px]">
                         <ThreeOrb className="w-full h-full" />
                     </div>

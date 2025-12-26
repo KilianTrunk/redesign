@@ -17,7 +17,7 @@ function AnimatedSphere({ scale }: { scale: number }) {
 
     return (
         <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
-            <Torus ref={sphereRef} args={[1, 0.6, 128, 64]} scale={scale}>
+            <Torus ref={sphereRef} args={[1, 0.6, 64, 32]} scale={scale}>
                 <MeshDistortMaterial
                     color="#CE2E2F"
                     attach="material"
@@ -54,7 +54,13 @@ export function ThreeOrb({ className }: { className?: string }) {
         <div className={`w-full h-full ${className ?? ""}`}>
             <Canvas
                 camera={{ position: [0, 0, 4.5], fov: 45 }}
-                gl={{ alpha: true, antialias: true }}
+                gl={{
+                    alpha: true,
+                    antialias: true,
+                    powerPreference: "high-performance"
+                }}
+                dpr={[1, 2]}
+                performance={{ min: 0.5 }}
                 style={{
                     width: "100%",
                     height: "100%",
