@@ -29,6 +29,17 @@ export function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isMobileMenuOpen]);
+
     useGSAP(() => {
         const ctx = gsap.context(() => {
             gsap.fromTo(headerRef.current,
@@ -75,7 +86,7 @@ export function Header() {
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden lg:flex items-center gap-12">
+                <nav className="hidden lg:flex items-center gap-6 xl:gap-12">
                     {NAV_ITEMS.map((item) => {
                         const isActive = pathname === item.href;
                         return (
@@ -83,16 +94,16 @@ export function Header() {
                                 key={item.label}
                                 href={item.href}
                                 className={cn(
-                                    "text-xl font-semibold transition-colors relative group",
+                                    "text-base xl:text-xl font-semibold transition-colors relative group",
                                     isActive ? "text-[var(--color-ortecha-main)]" : "text-[#343434] hover:text-[var(--color-ortecha-main)]"
                                 )}
                             >
                                 {item.label}
-                                <span 
+                                <span
                                     className={cn(
                                         "absolute left-1/2 -bottom-1 h-0.5 bg-[var(--color-ortecha-main)] transition-all duration-300",
                                         isActive ? "w-full left-0" : "w-0 group-hover:w-full group-hover:left-0"
-                                    )} 
+                                    )}
                                 />
                             </Link>
                         );
@@ -102,7 +113,7 @@ export function Header() {
                 <div className="hidden lg:flex items-center gap-4">
                     <Link
                         href="/contact-us"
-                        className="px-9 py-4 bg-[var(--color-ortecha-main)] text-white text-xl font-bold rounded-full hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg duration-200"
+                        className="px-6 xl:px-9 py-3 xl:py-4 bg-[var(--color-ortecha-main)] text-white text-base xl:text-xl font-bold rounded-full hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg duration-200"
                     >
                         Contact Us
                     </Link>
@@ -123,27 +134,45 @@ export function Header() {
                 {/* Mobile Nav Overlay */}
                 <div
                     className={cn(
-                        "fixed inset-0 bg-white z-40 lg:hidden flex flex-col items-center justify-center gap-12 transition-transform duration-500 ease-in-out",
+                        "fixed inset-0 z-40 lg:hidden transition-transform duration-500 ease-in-out bg-white",
                         isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
                     )}
                 >
-                    {NAV_ITEMS.map((item) => (
-                        <Link
-                            key={item.label}
-                            href={item.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="text-4xl font-bold text-gray-900 hover:text-[var(--color-ortecha-main)]"
-                        >
-                            {item.label}
-                        </Link>
-                    ))}
-                    <Link
-                        href="/contact-us"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="px-10 py-4 bg-[var(--color-ortecha-main)] text-white text-xl font-semibold rounded-full mt-6"
-                    >
-                        Contact Us
-                    </Link>
+                    <div className="flex flex-col h-full px-8 pt-32 pb-12">
+                        {/* Navigation Links */}
+                        <nav className="flex flex-col gap-8">
+                            {NAV_ITEMS.map((item, index) => {
+                                const isActive = pathname === item.href;
+                                return (
+                                    <Link
+                                        key={item.label}
+                                        href={item.href}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className={cn(
+                                            "text-3xl md:text-4xl font-bold transition-all duration-300 transform hover:translate-x-2",
+                                            isActive ? "text-[var(--color-ortecha-main)]" : "text-gray-900 hover:text-[var(--color-ortecha-main)]"
+                                        )}
+                                        style={{
+                                            transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : '0ms'
+                                        }}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                );
+                            })}
+                        </nav>
+
+                        {/* CTA Button */}
+                        <div className="mt-auto">
+                            <Link
+                                href="/contact-us"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="block w-full text-center px-10 py-5 bg-[var(--color-ortecha-main)] text-white text-xl font-bold rounded-full hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-lg hover:shadow-xl"
+                            >
+                                Contact Us
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
