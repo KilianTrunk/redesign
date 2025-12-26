@@ -63,22 +63,22 @@ export function TeamSection() {
     );
 
     return (
-        <Section ref={containerRef} className="py-20 bg-[var(--color-ortecha-bg-subtle)]">
+        <Section ref={containerRef} className="py-12 lg:py-20 bg-[var(--color-ortecha-bg-subtle)]">
             <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
-                    <div className="max-w-2xl space-y-4">
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 lg:mb-12 gap-6 lg:gap-8">
+                    <div className="max-w-2xl space-y-3 md:space-y-4">
                         <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest">Our people, your team</h3>
-                        <p className="text-xl text-gray-700">
-                            When you work with us, you don’t get consultants who observe from a distance. You get teammates who get stuck in alongside you.
+                        <p className="text-lg md:text-xl text-gray-700">
+                            When you work with us, you don't get consultants who observe from a distance. You get teammates who get stuck in alongside you.
                         </p>
-                        <p className="text-xl text-gray-700">
-                            You’ll know exactly who’s on your team and they’ll be there from day one all the way through to the end – no rotating cast.
+                        <p className="text-lg md:text-xl text-gray-700">
+                            You'll know exactly who's on your team and they'll be there from day one all the way through to the end – no rotating cast.
                         </p>
                     </div>
-                    <div>
+                    <div className="w-full md:w-auto">
                         <Link
                             href="/about-us"
-                            className="px-6 py-3 bg-[var(--color-ortecha-main)] text-white rounded-full font-semibold hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg inline-block"
+                            className="px-6 py-3 bg-[var(--color-ortecha-main)] text-white rounded-full font-semibold hover:bg-[var(--color-ortecha-dark-red)] transition-all shadow-md hover:shadow-lg inline-block w-full md:w-auto text-center"
                         >
                             Meet the team
                         </Link>
@@ -87,22 +87,22 @@ export function TeamSection() {
 
                 <div
                     ref={scrollContainerRef}
-                    className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 -mx-4 px-4 scrollbar-hide"
+                    className="grid grid-cols-2 md:grid-cols-3 lg:flex lg:overflow-x-auto lg:snap-x lg:snap-mandatory gap-4 md:gap-5 lg:gap-6 lg:pb-8 lg:-mx-4 lg:px-4 scrollbar-hide"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
                     {TEAM.map((member, index) => (
-                        <div key={index} className="team-card flex-shrink-0 w-[220px] md:w-auto md:flex-1 snap-center">
-                            <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow p-6">
+                        <div key={index} className="team-card lg:flex-shrink-0 lg:w-auto lg:flex-1 lg:snap-center">
+                            <div className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow p-3 md:p-5 lg:p-6">
                                 <div className="aspect-square relative">
                                     <img
                                         src={member.image}
                                         alt={member.name}
-                                        className="w-full h-full object-cover rounded-xl transition-transform duration-500 hover:scale-105 hover:z-10 relative"
+                                        className="w-full h-full object-cover rounded-lg lg:rounded-xl transition-transform duration-500 hover:scale-105 hover:z-10 relative"
                                     />
                                 </div>
-                                <div className="pt-4 pb-2 px-2">
-                                    <h4 className="font-bold text-base text-gray-900">{member.name}</h4>
-                                    <p className="text-xs text-[var(--color-ortecha-main)] font-medium mt-1">{member.role}</p>
+                                <div className="pt-3 md:pt-4 pb-1 md:pb-2 px-1 md:px-2">
+                                    <h4 className="font-bold text-sm md:text-base text-gray-900">{member.name}</h4>
+                                    <p className="text-[10px] md:text-xs text-[var(--color-ortecha-main)] font-medium mt-1">{member.role}</p>
                                 </div>
                             </div>
                         </div>

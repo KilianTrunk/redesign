@@ -10,7 +10,7 @@ const Section = forwardRef<HTMLElement, SectionProps>(
         return (
             <section
                 ref={ref}
-                className={cn("py-16 md:py-24 relative overflow-hidden", className)}
+                className={cn("py-16 md:py-24 relative", className)}
                 {...props}
             >
                 {container ? (

@@ -36,7 +36,7 @@ export function ClientLogos() {
                     scrollTrigger: {
                         trigger: containerRef.current,
                         start: "top 85%",
-                        toggleActions: "play none none reverse",
+                        toggleActions: "play none none none",
                     },
                 }
             );
@@ -48,14 +48,15 @@ export function ClientLogos() {
         if (!carouselRef.current) return;
 
         const carousel = carouselRef.current;
-        
-        // Ensure seamless loop by animating exactly half the width (one full set of logos)
-        // Since we have doubled the logos, moving -50% matches exactly one set length
+
+        // Create continuous infinite scroll animation
         const tween = gsap.to(carousel, {
             xPercent: -50,
-            duration: 12, // Faster speed (was 20)
+            duration: 20,
             ease: "none",
             repeat: -1,
+            paused: false,
+            immediateRender: true,
         });
 
         return () => {

@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Torus, MeshDistortMaterial, Float } from "@react-three/drei";
 import * as THREE from "three";
 
-function AnimatedSphere() {
+function AnimatedSphere({ scale }: { scale: number }) {
     const sphereRef = useRef<THREE.Mesh>(null);
 
     useFrame((state) => {
@@ -17,7 +17,7 @@ function AnimatedSphere() {
 
     return (
         <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
-            <Torus ref={sphereRef} args={[1, 0.6, 128, 64]} scale={1.0}>
+            <Torus ref={sphereRef} args={[1, 0.6, 128, 64]} scale={scale}>
                 <MeshDistortMaterial
                     color="#CE2E2F"
                     attach="material"
@@ -34,14 +34,30 @@ function AnimatedSphere() {
 }
 
 export function ThreeOrb({ className }: { className?: string }) {
+    const [scale, setScale] = useState(1.0);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 450) {
+                setScale(0.75); // 25% smaller
+            } else {
+                setScale(1.0);
+            }
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     return (
-        <div className={`w-full h-full min-h-[400px] ${className}`}>
+        <div className={`w-full h-full ${className}`}>
             <Canvas camera={{ position: [0, 0, 4.5], fov: 45 }} gl={{ alpha: true }}>
                 <ambientLight intensity={3} />
                 <directionalLight position={[5, 10, 7]} intensity={2} color="#ffffff" />
                 <directionalLight position={[-5, -5, -5]} intensity={1.5} color="#ffcccc" />
                 <pointLight position={[0, 0, 2]} intensity={1} color="#ff9999" />
-                <AnimatedSphere />
+                <AnimatedSphere scale={scale} />
             </Canvas>
         </div>
     );
