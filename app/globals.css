@@ -1,26 +1,166 @@
 @import "tailwindcss";
 
 :root {
+  /* Core Colors */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1d1d1f;
+  /* Apple's near-black */
+
+  /* Ortecha Palette (Extracted) */
+  --color-ortecha-black: #000000;
+  --color-ortecha-cyan-bluish-gray: #abb8c3;
+  --color-ortecha-white: #ffffff;
+  --color-ortecha-pale-pink: #f78da7;
+  --color-ortecha-vivid-red: #cf2e2e;
+  --color-ortecha-luminous-vivid-orange: #ff6900;
+  --color-ortecha-luminous-vivid-amber: #fcb900;
+  --color-ortecha-light-green-cyan: #7bdcb5;
+  --color-ortecha-vivid-green-cyan: #00d084;
+  --color-ortecha-pale-cyan-blue: #8ed1fc;
+  --color-ortecha-vivid-cyan-blue: #0693e3;
+  --color-ortecha-vivid-purple: #9b51e0;
+
+  /* Premium Gradients */
+  --gradient-ortecha-main: linear-gradient(135deg, #cf2e2e 0%, #a61b1b 100%);
+  --gradient-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  --gradient-glass-dark: linear-gradient(180deg, rgba(29, 29, 31, 0.8) 0%, rgba(29, 29, 31, 0.6) 100%);
+
+  /* Shadows - "Float" feel */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 100px rgba(207, 46, 46, 0.15);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-mono: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
+
+  /* Extend with custom colors */
+  --color-ortecha-black: var(--color-ortecha-black);
+  --color-ortecha-main: #cf2e2e;
+  --color-ortecha-accent: #343434;
+  --color-ortecha-dark-red: #a61b1b;
+  --color-ortecha-bg-subtle: #f5f5f7;
+  /* Apple-like light gray */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #f5f5f7;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.47059;
+  /* Apple's specific line-height ratio */
+  letter-spacing: -0.022em;
+  /* Apple's tight tracking */
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-dark {
+  background: rgba(29, 29, 31, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px) scale(1.005);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(207, 46, 46, 0.1);
+}
+
+/* Lenis Recommended Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Hide scrollbar */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
