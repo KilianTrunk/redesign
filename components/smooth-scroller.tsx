@@ -86,7 +86,6 @@ export function SmoothScroller({ children }: { children: ReactNode }) {
                 lerp: 0.08,
                 duration: 1.2,
                 smoothWheel: true,
-                smoothTouch: false,
                 touchMultiplier: 2,
                 infinite: false
             }}
