@@ -62,8 +62,8 @@ export function ValueProp() {
         <Section ref={containerRef} className="py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_50%,_rgba(206,46,47,0.05)_0%,_transparent_50%)] pointer-events-none"></div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div ref={textRef} className="px-4 space-y-8 order-2 lg:order-1">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div ref={textRef} className="px-4 space-y-8 order-2 lg:order-2">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight leading-tight">
                         Real people making<br />
                         <span className="text-[var(--color-ortecha-main)]">data&nbsp;&amp;&nbsp;AI</span> work for real people
@@ -88,7 +88,7 @@ export function ValueProp() {
                     </div>
                 </div>
 
-                <div ref={visualRef} className="order-1 lg:order-2 flex justify-center items-center">
+                <div ref={visualRef} className="order-1 lg:order-1 flex justify-center items-center">
                     <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl bg-black">
                         {!isPlaying ? (
                             <div 
