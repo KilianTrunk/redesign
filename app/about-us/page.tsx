@@ -1,16 +1,136 @@
+"use client";
+
+import { useRef } from "react";
 import { Section } from "@/components/ui/section";
 import { TeamGrid } from "@/components/about/team-grid";
 import { CTA } from "@/components/landing/cta";
-
 import { Timeline } from "@/components/about/timeline";
 import { LatestNews } from "@/components/about/latest-news";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutPage() {
+    const heroRef = useRef<HTMLDivElement>(null);
+    const storyRef = useRef<HTMLDivElement>(null);
+    const valuesRef = useRef<HTMLDivElement>(null);
+    const timelineRef = useRef<HTMLDivElement>(null);
+    const teamRef = useRef<HTMLDivElement>(null);
+    const newsRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        // Hero Section Animation
+        const heroChildren = gsap.utils.toArray(heroRef.current!.children);
+        gsap.fromTo(
+            heroChildren,
+            { opacity: 0, y: 50 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out",
+                delay: 0.3,
+            }
+        );
+
+        // Story Section Animation
+        const storyChildren = gsap.utils.toArray(storyRef.current!.children);
+        gsap.fromTo(
+            storyChildren,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                scrollTrigger: {
+                    trigger: storyRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+
+        // Values Section Animation
+        gsap.fromTo(
+            valuesRef.current,
+            { opacity: 0, x: 50 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: valuesRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+
+        // Timeline Section Animation
+        const timelineChildren = gsap.utils.toArray(timelineRef.current!.children);
+        gsap.fromTo(
+            timelineChildren,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: timelineRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+
+        // Team Section Animation
+        const teamChildren = gsap.utils.toArray(teamRef.current!.children);
+        gsap.fromTo(
+            teamChildren,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: teamRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+
+        // News Section Animation
+        const newsChildren = gsap.utils.toArray(newsRef.current!.children);
+        gsap.fromTo(
+            newsChildren,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: newsRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+    });
+
     return (
         <div className="pt-24">
             {/* Hero Section */}
             <Section className="bg-gray-50">
-                <div className="max-w-4xl">
+                <div ref={heroRef} className="max-w-4xl">
                     <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
                         We love what we do.
                     </h1>
@@ -23,7 +143,7 @@ export default function AboutPage() {
             {/* Our Story */}
             <Section className="bg-white" id="ourstory">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    <div>
+                    <div ref={storyRef}>
                         <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
                         <div className="space-y-6 text-lg text-gray-600">
                             <p>
@@ -51,7 +171,7 @@ export default function AboutPage() {
 
                     </div>
 
-                    <div className="space-y-12" id="values">
+                    <div ref={valuesRef} className="space-y-12" id="values">
                         <div className="bg-[var(--color-ortecha-main)] rounded-3xl p-6 md:p-10 text-white flex flex-col justify-center">
                             <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">What drives us?</h3>
                             <p className="mb-6 md:mb-8 font-medium italic opacity-90 text-base md:text-lg">
@@ -115,7 +235,7 @@ export default function AboutPage() {
 
             {/* How we got here */}
             <Section className="bg-gray-50" id="timeline">
-                <div className="text-center max-w-4xl mx-auto mb-12">
+                <div ref={timelineRef} className="text-center max-w-4xl mx-auto mb-12">
                     <h2 className="text-4xl font-bold text-gray-900 mb-6">How we got here</h2>
                     <p className="text-xl text-gray-600">
                         From our founding in the UK to our global expansion, here's our journey of growth and innovation.
@@ -126,7 +246,7 @@ export default function AboutPage() {
 
             {/* Team Section */}
             <Section className="bg-gray-50" id="ourpeople">
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <div ref={teamRef} className="text-center max-w-3xl mx-auto mb-16">
                     <h2 className="text-4xl font-bold text-gray-900 mb-6">Our People</h2>
                     <p className="text-xl text-gray-600">
                         Our leadership team brings a great range of diverse backgrounds. What unites them? A drive to make data make sense and to be truly valuable.
@@ -137,7 +257,7 @@ export default function AboutPage() {
 
             {/* Latest News */}
             <Section className="bg-white" id="latestnews">
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <div ref={newsRef} className="text-center max-w-3xl mx-auto mb-16">
                     <h2 className="text-4xl font-bold text-gray-900 mb-6">Latest news</h2>
                 </div>
                 <LatestNews />

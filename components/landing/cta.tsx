@@ -14,28 +14,10 @@ gsap.registerPlugin(ScrollTrigger);
 export function CTA() {
     const containerRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
-    const visualRef = useRef<HTMLDivElement>(null);
 
     useGSAP(
         () => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 75%",
-                    toggleActions: "play none none none",
-                }
-            });
-
-            tl.fromTo(
-                visualRef.current,
-                { opacity: 0 },
-                {
-                    opacity: 1,
-                    duration: 1,
-                    ease: "power3.out",
-                    immediateRender: false,
-                }
-            ).fromTo(
+            gsap.fromTo(
                 contentRef.current,
                 { y: 50, opacity: 0 },
                 {
@@ -43,9 +25,12 @@ export function CTA() {
                     opacity: 1,
                     duration: 1,
                     ease: "power3.out",
-                    immediateRender: false,
-                },
-                "-=0.8"
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 75%",
+                        toggleActions: "play none none none",
+                    }
+                }
             );
         },
         { scope: containerRef }
@@ -56,7 +41,7 @@ export function CTA() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,_rgba(206,46,47,0.1)_0%,_transparent_50%)] pointer-events-none"></div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <div ref={visualRef} className="flex justify-center items-center h-[280px] sm:h-[400px] lg:h-[500px] order-2 lg:order-1 px-4 sm:px-8 md:px-12 lg:px-20 py-8 sm:py-16 lg:py-24 opacity-100">
+                <div className="flex justify-center items-center h-[280px] sm:h-[400px] lg:h-[500px] order-2 lg:order-1 px-4 sm:px-8 md:px-12 lg:px-20 py-8 sm:py-16 lg:py-24">
                     <ThreeOrb className="w-full h-full" />
                 </div>
 

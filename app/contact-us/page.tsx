@@ -1,14 +1,75 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Section } from "@/components/ui/section";
 import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [cooldownTimeLeft, setCooldownTimeLeft] = useState(0);
+
+    const heroRef = useRef<HTMLDivElement>(null);
+    const formRef = useRef<HTMLDivElement>(null);
+    const locationsRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        // Hero Animation
+        const heroChildren = gsap.utils.toArray(heroRef.current!.children);
+        gsap.fromTo(
+            heroChildren,
+            { opacity: 0, y: 50 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out",
+                delay: 0.3,
+            }
+        );
+
+        // Form Animation
+        gsap.fromTo(
+            formRef.current,
+            { opacity: 0, x: -30 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: formRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+
+        // Locations Animation
+        const locationChildren = gsap.utils.toArray(locationsRef.current!.children);
+        gsap.fromTo(
+            locationChildren,
+            { opacity: 0, x: 30 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                scrollTrigger: {
+                    trigger: locationsRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+    });
 
     // Handle cooldown countdown
     useEffect(() => {
@@ -94,7 +155,7 @@ export default function ContactPage() {
     return (
         <div className="pt-24">
             <Section className="bg-gray-50 pb-16">
-                <div className="max-w-4xl text-center mx-auto">
+                <div ref={heroRef} className="max-w-4xl text-center mx-auto">
                     <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight">
                         Get in <span className="text-[var(--color-ortecha-main)]">touch</span>
                     </h1>
@@ -107,7 +168,7 @@ export default function ContactPage() {
             <Section className="bg-white">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                     {/* Contact Form */}
-                    <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100">
+                    <div ref={formRef} className="bg-gray-50 p-8 rounded-3xl border border-gray-100">
                         <h2 className="text-3xl font-bold text-gray-900 mb-6">Request a call</h2>
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -218,7 +279,7 @@ export default function ContactPage() {
                     </div>
 
                     {/* Locations */}
-                    <div className="space-y-12">
+                    <div ref={locationsRef} className="space-y-12">
                         <div>
                             <h2 className="text-3xl font-bold text-gray-900 mb-8">Where to find us</h2>
                             <div className="space-y-8">

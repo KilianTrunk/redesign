@@ -80,7 +80,7 @@ export function SolutionsIntro() {
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
                         How we work with you
                     </h2>
-                    <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+                    <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-12">
                         Without a clear approach, data efforts fragment. "Urgent" drowns out "important." Investment leaks into silos and value gets lost.
                     </p>
 
