@@ -73,14 +73,14 @@ export function Header() {
                     : "bg-transparent border-transparent"
             )}
         >
-            <div className="container mx-auto px-4 md:px-6 flex items-center justify-between min-h-[56px] md:min-h-[64px]">
-                <Link href="/" className="relative z-[70] flex items-center gap-2">
+            <div className="container mx-auto px-3 sm:px-4 md:px-6 flex items-center justify-between min-h-[56px] md:min-h-[64px]">
+                <Link href="/" className="relative z-[70] flex items-center gap-2 flex-shrink-0">
                     <Image
                         src="/assets/logo.png"
                         alt="Ortecha Logo"
                         width={270}
                         height={60}
-                        className="h-12 w-auto md:h-14"
+                        className="h-9 w-auto sm:h-11 md:h-14 max-w-[190px] sm:max-w-none"
                         priority
                     />
                 </Link>
@@ -121,8 +121,9 @@ export function Header() {
 
                 {/* Mobile Toggle */}
                 <button
-                    className="lg:hidden relative z-[70] p-2"
+                    className="lg:hidden relative z-[70] p-2 flex-shrink-0 -mr-1"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                 >
                     {isMobileMenuOpen ? (
                         <X className="w-9 h-9 text-gray-900" />
