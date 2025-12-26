@@ -18,6 +18,12 @@ const LOGOS = [
     { name: "Citibank", url: "https://ortecha.com/wp-content/uploads/2025/07/Citibank-Logo.png" },
     { name: "Mind", url: "https://ortecha.com/wp-content/uploads/2025/11/Mind-Logo.png" },
     { name: "Schroders", url: "https://ortecha.com/wp-content/uploads/2025/11/Schroders-Logo.png" },
+    { name: "Investec", url: "https://ortecha.com/wp-content/uploads/2025/07/Investec-Logo.png" },
+    { name: "Compare the Market", url: "https://ortecha.com/wp-content/uploads/2025/11/Compare-the-Market-Logo.png" },
+    { name: "Sky", url: "https://ortecha.com/wp-content/uploads/2025/11/Sky-Logo.png" },
+    { name: "TIFF", url: "https://ortecha.com/wp-content/uploads/2025/11/TIFF-Investment-Management-Logo.png" },
+    { name: "TD Bank", url: "https://ortecha.com/wp-content/uploads/2025/11/TD-Bank-Logo.png" },
+    { name: "CIBC Mellon", url: "https://ortecha.com/wp-content/uploads/2025/07/CIBC-Mellon-Logo.png" },
 ];
 
 export function ClientLogos() {
@@ -48,23 +54,35 @@ export function ClientLogos() {
         if (!carouselRef.current) return;
 
         const carousel = carouselRef.current;
+        let position = 0;
+        const speed = 1; // pixels per frame
 
-        // Create continuous infinite scroll animation
-        const tween = gsap.to(carousel, {
-            xPercent: -50,
-            duration: 20,
-            ease: "none",
-            repeat: -1,
-            paused: false,
-            immediateRender: true,
-        });
+        function animate() {
+            position -= speed;
+            carousel.style.transform = `translateX(${position}px)`;
+
+            // Reset position when we've scrolled one full set of logos
+            const logoWidth = 192; // Approximate width per logo
+            const gap = 80; // Gap between logos
+            const setWidth = LOGOS.length * (logoWidth + gap) - gap;
+
+            if (Math.abs(position) >= setWidth) {
+                position = 0;
+                carousel.style.transform = `translateX(0px)`;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
 
         return () => {
-            tween.kill();
+            // Cleanup will happen naturally when component unmounts
         };
     }, []);
 
-    const doubledLogos = [...LOGOS, ...LOGOS];
+    // Create 2 copies for seamless infinite scroll with modifiers
+    const duplicatedLogos = [...LOGOS, ...LOGOS];
 
     return (
         <Section ref={containerRef} className="py-24 bg-white overflow-hidden">
@@ -77,7 +95,7 @@ export function ClientLogos() {
 
             <div className="relative overflow-hidden">
                 <div ref={carouselRef} className="flex items-center gap-16 md:gap-20">
-                    {doubledLogos.map((logo, index) => (
+                    {duplicatedLogos.map((logo, index) => (
                         <div
                             key={index}
                             className="flex-shrink-0 w-40 h-24 md:w-48 md:h-28 relative flex items-center justify-center hover:scale-110 transition-transform duration-300"

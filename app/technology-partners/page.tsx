@@ -1,5 +1,6 @@
 import { Section } from "@/components/ui/section";
 import { CTA } from "@/components/landing/cta";
+import { ClientLogos } from "@/components/landing/client-logos";
 import { CheckCircle2, Beaker, Zap, Users } from "lucide-react";
 
 export default function TechnologyPartnersPage() {
@@ -64,34 +65,8 @@ export default function TechnologyPartnersPage() {
                 </div>
             </Section>
 
-            {/* Capabilities */}
-            <Section className="bg-gray-50">
-                <h2 className="text-3xl font-bold text-center mb-16 text-[var(--color-ortecha-main)]">Who we've worked with</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center opacity-80 text-center">
-                    {[
-                        { name: "HSBC", url: "https://ortecha.com/wp-content/uploads/2025/07/HSBC-Logo.png" },
-                        { name: "John Lewis", url: "https://ortecha.com/wp-content/uploads/2025/11/John-Lewis-Partnership-Logo.png" },
-                        { name: "Lloyds", url: "https://ortecha.com/wp-content/uploads/2025/11/Lloyds-Banking-Group-Logo.png" },
-                        { name: "Fannie Mae", url: "https://ortecha.com/wp-content/uploads/2025/07/Fannie-Mae-Logo.png" },
-                        { name: "Chanel", url: "https://ortecha.com/wp-content/uploads/2025/07/Chanel-Logo.png" },
-                        { name: "BMO", url: "https://ortecha.com/wp-content/uploads/2025/07/Bank-of-Montreal-Logo.png" },
-                        { name: "Citibank", url: "https://ortecha.com/wp-content/uploads/2025/07/Citibank-Logo.png" },
-                        { name: "Mind", url: "https://ortecha.com/wp-content/uploads/2025/11/Mind-Logo.png" },
-                        { name: "Schroders", url: "https://ortecha.com/wp-content/uploads/2025/11/Schroders-Logo.png" },
-                        { name: "Investec", url: "https://ortecha.com/wp-content/uploads/2025/07/Investec-Logo.png" },
-                        { name: "Compare the Market", url: "https://ortecha.com/wp-content/uploads/2025/11/Compare-the-Market-Logo.png" },
-                        { name: "Sky", url: "https://ortecha.com/wp-content/uploads/2025/11/Sky-Logo.png" },
-                        { name: "TIFF", url: "https://ortecha.com/wp-content/uploads/2025/11/TIFF-Investment-Management-Logo.png" },
-                        { name: "TD Bank", url: "https://ortecha.com/wp-content/uploads/2025/11/TD-Bank-Logo.png" },
-                        { name: "CIBC Mellon", url: "https://ortecha.com/wp-content/uploads/2025/07/CIBC-Mellon-Logo.png" }
-                    ].map((partner, i) => (
-                        <div key={i} className="flex justify-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100">
-                            {/* Using standard img tag for external clarity or Next Image if preferred - keeping standard for simplicity/compat as requested "links so it will work" */}
-                            <img src={partner.url} alt={partner.name} className="max-h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-105" />
-                        </div>
-                    ))}
-                </div>
-            </Section>
+            {/* Who we've worked with */}
+            <ClientLogos />
 
             <CTA />
         </div>
