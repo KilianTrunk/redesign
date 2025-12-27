@@ -21,17 +21,11 @@ export function Hero() {
         () => {
             const tl = gsap.timeline({
                 defaults: { ease: "power3.out" },
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 80%", // improved start position
-                    toggleActions: "play none none reverse", // Re-plays on enter, reverses on leave back
-                },
                 delay: 0.5 // Wait for header/menu to be perceived first
             });
 
-            // Initial Entrance Animation
-            // Removed scrollTrigger scrub logic to prevent "disappearing content" bug on scroll up.
-            // This ensures content is always visible after initial load.
+            // Initial Entrance Animation - plays once on load only
+            // No ScrollTrigger to prevent animation reversing on scroll
 
             tl.from(subtitleRef.current, {
                 y: 20,
@@ -57,11 +51,9 @@ export function Hero() {
                     ease: "power3.out",
                 }, "-=0.6")
                 .from(imageRef.current, {
-                    scale: 0.8,
                     opacity: 0,
-                    rotation: -10,
-                    duration: 1.5,
-                    ease: "elastic.out(1, 0.5)",
+                    duration: 1.2,
+                    ease: "power3.out",
                 }, "-=1");
         },
         { scope: containerRef }
@@ -113,8 +105,8 @@ export function Hero() {
                     </div>
                 </div>
 
-                <div className="order-1 lg:order-2 flex justify-center relative h-[780px] items-center hidden lg:flex">
-                    <div ref={imageRef} className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                <div className="order-1 lg:order-2 flex justify-center relative items-center hidden lg:flex" style={{ height: '780px', marginTop: '-80px' }}>
+                    <div ref={imageRef} className="relative w-full flex items-center justify-center overflow-hidden" style={{ height: '780px' }}>
                         <ThreeMarketChart className="z-10" />
                     </div>
                 </div>

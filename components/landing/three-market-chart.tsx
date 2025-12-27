@@ -24,25 +24,21 @@ function Candlestick({ data, index }: { data: CandlestickData; index: number }) 
     useEffect(() => {
         if (!groupRef.current || !bodyRef.current || !wickRef.current) return;
 
-        // Reduced delay to 1.0s to start filling as text appears
-        const tl = gsap.timeline({ delay: 1.0 + index * 0.08 });
-
-        gsap.set(groupRef.current.position, { y: -8 });
+        // Set initial positions immediately - no vertical movement to prevent jumping
+        gsap.set(groupRef.current.position, { y: 0 });
         gsap.set(bodyRef.current.scale, { y: 0, x: 0, z: 0 });
         gsap.set(wickRef.current.scale, { y: 0 });
 
-        tl.to(groupRef.current.position, {
-            y: 0,
-            duration: 1.2,
-            ease: "elastic.out(1, 0.6)",
-        })
-        .to(bodyRef.current.scale, {
+        // Only animate scale, not position - delayed for visual effect
+        const tl = gsap.timeline({ delay: 1.0 + index * 0.08 });
+
+        tl.to(bodyRef.current.scale, {
             y: 1,
             x: 1,
             z: 1,
             duration: 0.8,
             ease: "back.out(2)",
-        }, "-=0.8")
+        })
         .to(wickRef.current.scale, {
             y: 1,
             duration: 0.5,
@@ -247,14 +243,15 @@ function Scene() {
     const { camera } = useThree();
 
     useEffect(() => {
-        camera.position.set(0, 1.5, 7);
+        // Match the initial camera position from Canvas props - moved up higher
+        camera.position.set(0, -0.3, 7);
         camera.lookAt(0, 0, 0);
     }, [camera]);
 
     useFrame((state) => {
         const time = state.clock.getElapsedTime();
         camera.position.x = Math.sin(time * 0.1) * 0.8;
-        camera.position.y = 1.5 + Math.sin(time * 0.15) * 0.5;
+        camera.position.y = -0.3 + Math.sin(time * 0.15) * 0.5;
     });
 
     return (
@@ -280,21 +277,25 @@ function Scene() {
 
 export function ThreeMarketChart({ className }: { className?: string }) {
     return (
-        <div 
-            className={`w-full h-full min-h-[600px] ${className}`} 
-            style={{ 
+        <div
+            className={`w-full h-full ${className}`}
+            style={{
                 background: 'transparent',
                 maskImage: 'linear-gradient(to right, transparent, black 10%, black 80%, transparent)',
-                WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 80%, transparent)'
+                WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 80%, transparent)',
+                minHeight: '780px',
+                maxHeight: '780px'
             }}
         >
             <Canvas
-                camera={{ position: [0, 2, 8], fov: 50 }}
+                camera={{ position: [0, -0.3, 7], fov: 50 }}
                 gl={{
                     alpha: true,
                     antialias: true,
                     powerPreference: "high-performance"
                 }}
+                resize={{ scroll: false }}
+                dpr={[1, 2]}
             >
                 {/* Removed background color for transparency */}
                 <Scene />
