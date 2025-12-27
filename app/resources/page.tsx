@@ -91,6 +91,7 @@ const RESOURCES = [
 
 export default function ResourcesPage() {
     const [activeCategory, setActiveCategory] = useState("All");
+    const [shouldAnimate, setShouldAnimate] = useState(false);
     const heroRef = useRef<HTMLDivElement>(null);
     const filterRef = useRef<HTMLDivElement>(null);
     const gridRef = useRef<HTMLDivElement>(null);
@@ -99,6 +100,7 @@ export default function ResourcesPage() {
         ? RESOURCES
         : RESOURCES.filter(r => r.category === activeCategory);
 
+    // Initial page load animations (run once)
     useGSAP(() => {
         // Hero Animation
         const heroChildren = gsap.utils.toArray(heroRef.current!.children);
@@ -115,7 +117,7 @@ export default function ResourcesPage() {
             }
         );
 
-        // Filter Animation
+        // Filter Animation (only on initial load)
         gsap.fromTo(
             filterRef.current,
             { opacity: 0, y: -20 },
@@ -127,25 +129,27 @@ export default function ResourcesPage() {
                 delay: 0.6,
             }
         );
+    }, []);
 
-        // Grid Animation
+    // Grid animation when category changes
+    useGSAP(() => {
+        if (!shouldAnimate) return;
+
         const gridItems = gsap.utils.toArray(gridRef.current!.children);
+
         gsap.fromTo(
             gridItems,
-            { opacity: 0, y: 30 },
+            { opacity: 0, y: 20 },
             {
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
-                stagger: 0.1,
-                scrollTrigger: {
-                    trigger: gridRef.current,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse",
-                },
+                duration: 0.5,
+                stagger: 0.05,
+                ease: "power2.out",
+                onComplete: () => setShouldAnimate(false),
             }
         );
-    }, [filteredResources]);
+    }, [filteredResources, shouldAnimate]);
 
     return (
         <div className="pt-24">
@@ -168,7 +172,24 @@ export default function ResourcesPage() {
                         {CATEGORIES.map((cat) => (
                             <button
                                 key={cat}
-                                onClick={() => setActiveCategory(cat)}
+                                onClick={() => {
+                                    if (cat === activeCategory) return;
+
+                                    setShouldAnimate(true);
+                                    setActiveCategory(cat);
+
+                                    // Only scroll if grid is not in view
+                                    if (gridRef.current) {
+                                        const rect = gridRef.current.getBoundingClientRect();
+                                        const isInView = rect.top >= 0 && rect.top <= window.innerHeight;
+
+                                        if (!isInView) {
+                                            const yOffset = -250; // Offset to scroll more up
+                                            const y = gridRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                                            window.scrollTo({ top: y, behavior: 'smooth' });
+                                        }
+                                    }
+                                }}
                                 className={cn(
                                     "px-2 py-1.5 md:px-6 md:py-2 rounded-full text-[11px] md:text-sm font-bold transition-all",
                                     activeCategory === cat
@@ -190,9 +211,9 @@ export default function ResourcesPage() {
                         <Link
                             key={index}
                             href={resource.href}
-                            className="group block bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-xl hover:border-[var(--color-ortecha-main)]/20 transition-all duration-300 h-full flex flex-col"
+                            className="group block bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-xl hover:border-[var(--color-ortecha-main)]/20 transition-all duration-300 flex flex-col min-h-[500px]"
                         >
-                            <div className="relative mb-6 h-48 w-full overflow-hidden rounded-xl">
+                            <div className="relative mb-6 h-48 w-full overflow-hidden rounded-xl flex-shrink-0">
                                 <img
                                     src={resource.image}
                                     alt={resource.title}
@@ -203,7 +224,7 @@ export default function ResourcesPage() {
                                 </div>
                             </div>
 
-                            <div className="mb-4">
+                            <div className="mb-4 flex-shrink-0">
                                 <span className="text-[var(--color-ortecha-main)] text-xs font-bold uppercase tracking-wide">
                                     {resource.category}
                                 </span>
@@ -216,7 +237,7 @@ export default function ResourcesPage() {
                                 {resource.description}
                             </p>
 
-                            <div className="flex items-center gap-2 text-sm font-bold text-gray-900 group-hover:text-[var(--color-ortecha-main)]">
+                            <div className="flex items-center gap-2 text-sm font-bold text-gray-900 group-hover:text-[var(--color-ortecha-main)] flex-shrink-0">
                                 Read More <ArrowUpRight className="w-4 h-4" />
                             </div>
                         </Link>
